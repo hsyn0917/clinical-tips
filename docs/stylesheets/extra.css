@@ -1,0 +1,70 @@
+/* Mobile/iPad readability tweaks */
+
+/* Slightly larger body text and spacing */
+.md-typeset {
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+/* Keep headings compact but readable */
+.md-typeset h2 {
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+}
+
+.md-typeset h3 {
+  margin-top: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+/* Responsive tables */
+.md-typeset table:not([class]) {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+/* Allow long Japanese medical terms to wrap in cells */
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  white-space: normal;
+  min-width: 9rem;
+  vertical-align: top;
+}
+
+/* Images fit screen and keep clean spacing */
+.md-typeset img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Improve readability of code blocks (flowchart text etc.) */
+.md-typeset pre {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+
+/* On small screens, tighten side padding feel */
+@media screen and (max-width: 768px) {
+  .md-typeset {
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .md-typeset h1 {
+    font-size: 1.45rem;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.2rem;
+  }
+
+  .md-typeset h3 {
+    font-size: 1.05rem;
+  }
+}

@@ -2,6 +2,8 @@ site_name: ER Clinical Tips
 site_description: Personal ER quick reference
 theme:
   name: material
+extra_css:
+  - stylesheets/extra.css
 nav:
   - Home: index.md
   - めまい: dizziness.md
