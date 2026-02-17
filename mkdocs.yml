@@ -1,9 +1,22 @@
-site_name: ER Clinical Tips
-site_description: Personal ER quick reference
+site_name: Clinical Tips
+site_description: Personal clinical quick reference
+
 theme:
   name: material
+  features:
+    - toc.integrate
+    - toc.follow
+    - navigation.sections
+    - navigation.expand
+
+markdown_extensions:
+  - toc:
+      toc_depth: 2
+      permalink: true
+
 extra_css:
   - stylesheets/extra.css
+
 nav:
   - Home: index.md
   - めまい: dizziness.md

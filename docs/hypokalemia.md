@@ -71,7 +71,7 @@
 
 ## 低 K 血症のマネジメント：①原因検索
 
-### 低 K 血症原因検索フローチャート
+## 低 K 血症原因検索フローチャート
 ![低K血症原因検索フローチャート](assets/hypokalemia-cause-flow.png)
 
 > *Arch Intern Med. 2004 Jul 26;164(14):1561-6 / Am J Kidney Dis. 2010 Dec;56(6):1184-90 / Kidney Int Rep. 2021 Feb 13;6(5):1211-24*
@@ -121,7 +121,7 @@
 
 ## 低 K 血症のマネジメント：②低 K 血症の補正
 
-### 低 K 血症補正フローチャート（血清 K < 3.5 mEq/L）
+## 低 K 血症補正フローチャート（血清 K < 3.5 mEq/L）
 ![低K血症補正フローチャート](assets/hypokalemia-repletion-flow.png)
 
 > *Am J Kidney Dis. 2012 Sep;60(3):492-7*
