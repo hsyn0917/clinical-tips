@@ -1,0 +1,9 @@
+site_name: ER Clinical Tips
+site_description: Personal ER quick reference
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - めまい: dizziness.md
+  - 胸痛: chest-pain.md
+  - 運用ルール: operations.md
