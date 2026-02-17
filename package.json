@@ -1,0 +1,26 @@
+{
+  "name": "clinical-tips",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsyn0917/clinical-tips.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hsyn0917/clinical-tips/issues"
+  },
+  "homepage": "https://github.com/hsyn0917/clinical-tips#readme",
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}
