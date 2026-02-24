@@ -1,13 +1,34 @@
 site_name: Clinical Tips
-site_description: Personal clinical quick reference
+site_description: 個人用臨床クイックリファレンス
 
 theme:
   name: material
+  language: ja
+  palette:
+    - scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: ダークモードに切替
+    - scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: ライトモードに切替
+  font:
+    text: Noto Sans JP
+    code: Roboto Mono
   features:
     - toc.integrate
     - toc.follow
     - navigation.sections
     - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
 
 markdown_extensions:
   - toc:
