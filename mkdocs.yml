@@ -36,7 +36,11 @@ markdown_extensions:
       permalink: true
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 extra_css:
   - stylesheets/extra.css
@@ -48,4 +52,6 @@ nav:
   - 栄養管理: nutrition.md
   - 好中球減少性腸炎: neutropenic-enterocolitis.md
   - 肺炎球菌ワクチン: pneumococcal-vaccine.md
+  - 精巣腫瘍・胚細胞腫瘍: germ-cell-tumor.md
+  - CDI: cdi.md
   - 運用ルール: operations.md
