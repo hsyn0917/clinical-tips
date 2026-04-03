@@ -1,247 +1,377 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>肺癌 抗癌剤 腎機能別用量調整一覧</title>
-<style>
-  body { font-family: "Hiragino Kaku Gothic Pro", "Yu Gothic", Meiryo, sans-serif; font-size: 11px; margin: 20px; color: #222; }
-  h1 { font-size: 15px; color: #1a3c6e; border-bottom: 2px solid #1a3c6e; padding-bottom: 6px; }
-  .note { font-size: 10px; color: #555; margin-bottom: 14px; line-height: 1.6; }
-  table { border-collapse: collapse; width: 100%; table-layout: fixed; }
-  th, td { border: 1px solid #888; padding: 4px 6px; vertical-align: top; line-height: 1.5; }
-  th { background: #1a3c6e; color: #fff; text-align: center; font-weight: bold; font-size: 10px; }
-  .cat { background: #d6e4f0; font-weight: bold; text-align: center; vertical-align: middle; font-size: 10px; writing-mode: horizontal-tb; }
-  .imp { text-align: center; font-weight: bold; }
-  .center { text-align: center; }
-  .warn { background: #fff8e1; }
-  .danger { background: #fce4ec; }
-  .bold { font-weight: bold; }
-  .sub-section { background: #eef3fa; font-weight: bold; font-size: 10px; }
-  col.c-cat { width: 6%; }
-  col.c-name { width: 10%; }
-  col.c-norm { width: 16%; }
-  col.c-mid { width: 18%; }
-  col.c-low { width: 18%; }
-  col.c-hd { width: 18%; }
-  col.c-sm { width: 3.5%; }
-  .legend { margin-top: 16px; font-size: 10px; color: #444; line-height: 1.7; }
-  .legend dt { font-weight: bold; display: inline; }
-  .legend dd { display: inline; margin-left: 0; margin-right: 14px; }
-  @media print { body { margin: 10px; font-size: 9px; } }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>肺癌 抗癌剤 腎機能別用量調整一覧</title>
+  <style>
+    body {
+      font-family: "Hiragino Kaku Gothic Pro", "Yu Gothic", Meiryo, sans-serif;
+      font-size: 12px;
+      margin: 20px;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 16px;
+      color: #1a3c6e;
+      border-bottom: 2px solid #1a3c6e;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #555;
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    th,
+    td {
+      border: 1px solid #999;
+      padding: 5px 7px;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    th {
+      background: #1a3c6e;
+      color: #fff;
+      text-align: center;
+      font-weight: bold;
+      font-size: 11px;
+    }
+
+    tbody tr:hover td {
+      filter: brightness(0.96);
+    }
+
+    .cat {
+      background: #d6e4f0;
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 11px;
+      writing-mode: horizontal-tb;
+    }
+
+    .imp {
+      text-align: center;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .warn {
+      background: #fff8e1;
+    }
+
+    .danger {
+      background: #fce4ec;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .sub-section {
+      background: #dde8f5;
+      font-weight: bold;
+      font-size: 11px;
+      color: #1a3c6e;
+      border-top: 2px solid #1a3c6e;
+    }
+
+    col.c-cat {
+      width: 5.5%;
+    }
+
+    col.c-name {
+      width: 10.5%;
+    }
+
+    col.c-norm {
+      width: 16%;
+    }
+
+    col.c-mid {
+      width: 18%;
+    }
+
+    col.c-low {
+      width: 16%;
+    }
+
+    col.c-hd {
+      width: 16%;
+    }
+
+    col.c-sm {
+      width: 3.5%;
+    }
+
+    .legend {
+      margin-top: 16px;
+      font-size: 11px;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    .legend dt {
+      font-weight: bold;
+      display: inline;
+    }
+
+    .legend dd {
+      display: inline;
+      margin-left: 0;
+      margin-right: 14px;
+    }
+
+    @media print {
+      body {
+        margin: 10px;
+        font-size: 9px;
+      }
+
+      tbody tr:hover td {
+        filter: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>肺癌で使用する主な抗癌剤の腎機能低下時の投与量一覧</h1>
-<div class="note">
-  出典：腎機能低下時の主な薬剤投与量一覧 改訂37版（2014年2月28日）より肺癌関連薬剤を抜粋<br>
-  ※最新の添付文書・ガイドラインも併せてご確認ください
-</div>
+  <h1>肺癌で使用する主な抗癌剤の腎機能低下時の投与量一覧</h1>
+  <div class="note">
+    出典：腎機能低下時の主な薬剤投与量一覧 改訂37版（2014年2月28日）より肺癌関連薬剤を抜粋<br>
+    ※最新の添付文書・ガイドラインも併せてご確認ください
+  </div>
 
-<table>
-<colgroup>
-  <col class="c-cat">
-  <col class="c-name">
-  <col class="c-norm">
-  <col class="c-mid">
-  <col class="c-low">
-  <col class="c-hd">
-  <col class="c-sm">
-  <col class="c-sm">
-  <col class="c-sm">
-</colgroup>
-<thead>
-  <tr>
-    <th>分類</th>
-    <th>一般名<br>（略号）</th>
-    <th>CCr＞50 mL/min<br>（腎機能正常者と同じ）</th>
-    <th>CCr 10～50 mL/min</th>
-    <th>CCr＜10 mL/min</th>
-    <th>HD（血液透析）</th>
-    <th>重要度</th>
-    <th>腎障害<br>禁忌</th>
-    <th>透析性</th>
-  </tr>
-</thead>
-<tbody>
+  <table>
+    <colgroup>
+      <col class="c-cat">
+      <col class="c-name">
+      <col class="c-norm">
+      <col class="c-mid">
+      <col class="c-low">
+      <col class="c-hd">
+      <col class="c-sm">
+      <col class="c-sm">
+      <col class="c-sm">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>分類</th>
+        <th>一般名<br>（略号）</th>
+        <th>CCr＞50 mL/min<br>（腎機能正常者と同じ）</th>
+        <th>CCr 10～50 mL/min</th>
+        <th>CCr＜10 mL/min</th>
+        <th>HD（血液透析）</th>
+        <th>重要度</th>
+        <th>腎障害<br>禁忌</th>
+        <th>透析性</th>
+      </tr>
+    </thead>
+    <tbody>
 
-  <!-- ===== 白金製剤 ===== -->
-  <tr>
-    <td class="cat" rowspan="3">白金製剤</td>
-    <td class="bold">シスプラチン<br>（CDDP）</td>
-    <td>添付文書参照</td>
-    <td class="danger">CCr46～60: 75%に減量<br>CCr31～45: 50%に減量<br><b>CCr≦30: 投与しない</b></td>
-    <td class="danger"><b>禁忌</b>だが、必要な場合には透析後に50%を投与</td>
-    <td class="danger"><b>禁忌</b>だが、必要な場合には透析後に50%を投与</td>
-    <td class="imp">◎</td>
-    <td class="center danger">禁</td>
-    <td class="center">○</td>
-  </tr>
-  <tr>
-    <td class="bold">カルボプラチン<br>（CBDCA）</td>
-    <td>1回300～400mg/m²<br>少なくとも4週間休薬</td>
-    <td class="warn" colspan="3">カルバートの式で算出：投与量(mg)＝AUC目標値×(GFR+25)<br>透析患者ではGFRに5～10を代入する。<br>酵素法によるCr値ではGFRが過大評価されやすく過量投与に注意。<br>体表面積補正を外したeGFRの使用が推奨される</td>
-    <td class="imp">◎</td>
-    <td class="center">—</td>
-    <td class="center">○</td>
-  </tr>
-  <tr>
-    <td class="bold">ネダプラチン<br>（CDGP）</td>
-    <td>添付文書参照</td>
-    <td class="danger"><b>重篤な腎障害には禁忌</b></td>
-    <td class="danger"><b>禁忌</b></td>
-    <td class="danger"><b>禁忌</b></td>
-    <td class="imp">◎</td>
-    <td class="center danger">禁</td>
-    <td class="center">○</td>
-  </tr>
+      <!-- ===== 白金製剤 ===== -->
+      <tr>
+        <td class="cat" rowspan="3">白金製剤</td>
+        <td class="bold">シスプラチン<br>（CDDP）</td>
+        <td>添付文書参照</td>
+        <td class="danger">CCr46～60: 75%に減量<br>CCr31～45: 50%に減量<br><b>CCr≦30: 投与しない</b></td>
+        <td class="danger"><b>禁忌</b>だが、必要な場合には透析後に50%を投与</td>
+        <td class="danger"><b>禁忌</b>だが、必要な場合には透析後に50%を投与</td>
+        <td class="imp">◎</td>
+        <td class="center danger">禁</td>
+        <td class="center">○</td>
+      </tr>
+      <tr>
+        <td class="bold">カルボプラチン<br>（CBDCA）</td>
+        <td>1回300～400mg/m²<br>少なくとも4週間休薬</td>
+        <td class="warn" colspan="3">
+          カルバートの式で算出：投与量(mg)＝AUC目標値×(GFR+25)<br>透析患者ではGFRに0を代入する。<br>酵素法によるCr値ではGFRが過大評価されやすく過量投与に注意。
+        </td>
+        <td class="imp">◎</td>
+        <td class="center">—</td>
+        <td class="center">○</td>
+      </tr>
+      <tr>
+        <td class="bold">ネダプラチン<br>（CDGP）</td>
+        <td>添付文書参照</td>
+        <td class="danger"><b>重篤な腎障害には禁忌</b></td>
+        <td class="danger"><b>禁忌</b></td>
+        <td class="danger"><b>禁忌</b></td>
+        <td class="imp">◎</td>
+        <td class="center danger">禁</td>
+        <td class="center">○</td>
+      </tr>
 
-  <!-- ===== 代謝拮抗剤 ===== -->
-  <tr>
-    <td class="cat" rowspan="3">代謝<br>拮抗剤</td>
-    <td class="bold">ペメトレキセド<br>（PEM）</td>
-    <td>1日1回500mg/m²を10分間かけて点滴静注、少なくとも20日間休薬</td>
-    <td class="warn">CCr≧45: 腎機能正常者と同じ<br><b>CCr＜45: データ不十分</b>のため推奨しない</td>
-    <td class="warn">不明</td>
-    <td class="warn">不明</td>
-    <td class="imp">◎</td>
-    <td class="center">—</td>
-    <td class="center">○</td>
-  </tr>
-  <tr>
-    <td class="bold">ゲムシタビン<br>（GEM）</td>
-    <td>週1回1,000mg/m²<br>3週連続投与<br>4週目休薬</td>
-    <td>腎機能正常者と同じだが、代謝物dFdUのCLが低下するため慎重投与</td>
-    <td colspan="2">代謝物dFdUのCLが低下するが透析性は高いため用量調節不要。ただし慎重投与</td>
-    <td class="imp">△</td>
-    <td class="center">—</td>
-    <td class="center">○</td>
-  </tr>
-  <tr>
-    <td class="bold">TS-1<br>（S-1）</td>
-    <td>CCr≧80: 体表面積に合わせ1回40～60mgを1日2回、28日投与14日休薬</td>
-    <td class="warn">80＞CCr≧60: 必要に応じ1段階減量<br>60＞CCr≧40: 原則1段階減量<br>40＞CCr≧30: 原則2段階減量<br><b>CCr＜30: 投与不可</b></td>
-    <td class="danger"><b>禁忌</b><br>ギメラシルの腎排泄が著しく低下し、血中フルオロウラシル濃度が上昇するため</td>
-    <td class="danger"><b>禁忌</b></td>
-    <td class="imp">◎</td>
-    <td class="center danger">禁</td>
-    <td class="center">○</td>
-  </tr>
+      <!-- ===== 代謝拮抗剤 ===== -->
+      <tr>
+        <td class="cat" rowspan="3">代謝<br>拮抗剤</td>
+        <td class="bold">ペメトレキセド<br>（PEM）</td>
+        <td>1日1回500mg/m²を10分間かけて点滴静注、少なくとも20日間休薬</td>
+        <td class="warn">CCr≧45: 腎機能正常者と同じ。<b>CCr＜45:</b> 重度の腎機能障害患者で、本剤に起因したと考えられる死亡が報告されているので、投与しないことが望ましい（十分な情報なし）
+        </td>
+        <td class="warn">不明</td>
+        <td class="warn">不明</td>
+        <td class="imp">◎</td>
+        <td class="center">—</td>
+        <td class="center">○</td>
+      </tr>
+      <tr>
+        <td class="bold">ゲムシタビン<br>（GEM）</td>
+        <td>週1回1,000mg/m²<br>3週連続投与<br>4週目休薬</td>
+        <td colspan="2">腎機能正常者と同じだが、代謝物dFdUのCLが低下するため慎重投与</td>
+        <td>代謝物dFdUのCLが低下するが透析性は高いため用量調節不要。ただし慎重投与</td>
+        <td class="imp">△</td>
+        <td class="center">—</td>
+        <td class="center">○</td>
+      </tr>
+      <tr>
+        <td class="bold">TS-1<br>（S-1）</td>
+        <td>CCr≧80: 体表面積に合わせ1回40～60mgを1日2回、28日投与14日休薬</td>
+        <td class="warn">80＞CCr≧60: 必要に応じ1段階減量<br>60＞CCr≧40: 原則1段階減量<br>40＞CCr≧30: 原則2段階減量<br><b>CCr＜30: 投与不可</b></td>
+        <td class="danger"><b>禁忌</b><br>ギメラシルの腎排泄が著しく低下し、血中フルオロウラシル濃度が上昇するため</td>
+        <td class="danger"><b>禁忌</b></td>
+        <td class="imp">◎</td>
+        <td class="center danger">禁</td>
+        <td class="center">○</td>
+      </tr>
 
-  <!-- ===== 抗生物質抗がん剤 ===== -->
-  <tr>
-    <td class="cat">抗腫瘍性<br>抗生物質</td>
-    <td class="bold">アムルビシン<br>（AMR）</td>
-    <td>45mg/m²を1日1回<br>3日間連日静脈内投与、3～4週間休薬</td>
-    <td class="warn" colspan="2"><b>血清Cr＞3mg/dLでは50%に減量</b>（FDA）</td>
-    <td class="warn">不明</td>
-    <td class="imp">△</td>
-    <td class="center">—</td>
-    <td class="center">×</td>
-  </tr>
+      <!-- ===== 抗生物質抗がん剤 ===== -->
+      <tr>
+        <td class="cat">抗腫瘍性<br>抗生物質</td>
+        <td class="bold">アムルビシン<br>（AMR）</td>
+        <td>45mg/m²を1日1回<br>3日間連日静脈内投与、3～4週間休薬</td>
+        <td class="warn" colspan="2"><b>腎障害のある患者は副作用が強くあらわれるおそれがあるため慎重投与になっており、75％に減量して開始</td>
+        <td class="warn">不明</td>
+        <td class="imp">△</td>
+        <td class="center">—</td>
+        <td class="center">×</td>
+      </tr>
 
-  <!-- ===== トポイソメラーゼ阻害薬 ===== -->
-  <tr>
-    <td class="cat" rowspan="2">トポイソメ<br>ラーゼ<br>阻害薬</td>
-    <td class="bold">エトポシド<br>（ETP）</td>
-    <td>注射：1日60～100mg/m² 5日間連続点滴静注、3週間休薬<br>経口：175～200mg/日</td>
-    <td class="warn"><b>75%に減量</b></td>
-    <td class="warn"><b>75%に減量</b></td>
-    <td class="warn"><b>75%に減量</b></td>
-    <td class="imp">○</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-  </tr>
-  <tr>
-    <td class="bold">イリノテカン<br>（CPT-11）</td>
-    <td>添付文書参照</td>
-    <td>腎機能正常者と同じ</td>
-    <td class="warn">投与を推奨しないが、投与するなら125→50mg/m²を透析後または非透析日に</td>
-    <td class="warn">同左</td>
-    <td class="imp">—</td>
-    <td class="center">—</td>
-    <td class="center">×</td>
-  </tr>
+      <!-- ===== トポイソメラーゼ阻害薬 ===== -->
+      <tr>
+        <td class="cat" rowspan="2">トポイソメ<br>ラーゼ<br>阻害薬</td>
+        <td class="bold">エトポシド<br>（ETP）</td>
+        <td>注射：1日60～100mg/m² 5日間連続点滴静注、3週間休薬<br>経口：175～200mg/日</td>
+        <td class="warn"><b>75%に減量</b></td>
+        <td class="warn"><b>75%に減量</b></td>
+        <td class="warn"><b>75%に減量</b></td>
+        <td class="imp">○</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+      </tr>
+      <tr>
+        <td class="bold">イリノテカン<br>（CPT-11）</td>
+        <td>添付文書参照</td>
+        <td>腎機能正常者と同じ</td>
+        <td class="warn">投与を推奨しないが、投与するなら125→50mg/m²を透析後または非透析日に</td>
+        <td class="warn">同左</td>
+        <td class="imp">—</td>
+        <td class="center">—</td>
+        <td class="center">×</td>
+      </tr>
 
-  <!-- ===== 用量調整不要 ===== -->
-  <tr>
-    <td class="sub-section" colspan="9">▼ 以下の薬剤は腎機能低下時も原則として用量調整不要（腎機能正常者と同じ）</td>
-  </tr>
-  <tr>
-    <td class="cat" rowspan="2">タキサン系</td>
-    <td>ドセタキセル（DTX）</td>
-    <td colspan="4">腎機能正常者と同じ（主に肝代謝。副作用の強度は血中α1酸性糖蛋白質濃度に依存）</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-    <td class="center">○</td>
-  </tr>
-  <tr>
-    <td>パクリタキセル（PTX）<br>nab-PTX含む</td>
-    <td colspan="4">腎機能正常者と同じ（主に肝代謝）</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-  </tr>
-  <tr>
-    <td class="cat">ビンカ<br>アルカロイド</td>
-    <td>ビノレルビン（VNR）</td>
-    <td colspan="4">腎機能正常者と同じ（主に肝代謝）</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-    <td class="center">○</td>
-  </tr>
-  <tr>
-    <td class="cat" rowspan="3">分子標的薬<br>（TKI）</td>
-    <td>ゲフィチニブ（GEF）</td>
-    <td colspan="4">腎機能正常者と同じ（腎排泄の寄与が少ない）</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-    <td class="center">×</td>
-  </tr>
-  <tr>
-    <td>エルロチニブ（ERL）</td>
-    <td colspan="4">腎機能正常者と同じ（腎排泄の寄与が少ない）</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-    <td class="center">×</td>
-  </tr>
-  <tr>
-    <td>クリゾチニブ（CRZ）</td>
-    <td colspan="4">腎機能正常者と同じ（腎排泄の寄与が少ない）</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-    <td class="center">×</td>
-  </tr>
-  <tr>
-    <td class="cat">抗体製剤</td>
-    <td>ベバシズマブ（BEV）</td>
-    <td colspan="4">腎機能正常者と同じ（抗体製剤のため腎排泄の影響を受けにくい）</td>
-    <td class="center">—</td>
-    <td class="center">—</td>
-    <td class="center">○</td>
-  </tr>
-  <tr>
-    <td class="cat">mTOR<br>阻害剤</td>
-    <td>エベロリムス（EVE）</td>
-    <td colspan="4">腎機能正常者と同じ（主に肝代謝）</td>
-    <td class="center">○</td>
-    <td class="center">—</td>
-    <td class="center">○</td>
-  </tr>
+      <!-- ===== 用量調整不要 ===== -->
+      <tr>
+        <td class="sub-section" colspan="9">▼ 以下の薬剤は腎機能低下時も原則として用量調整不要（腎機能正常者と同じ）</td>
+      </tr>
+      <tr>
+        <td class="cat" rowspan="2">タキサン系</td>
+        <td>ドセタキセル（DTX）</td>
+        <td colspan="4">腎機能正常者と同じ（主に肝代謝。副作用の強度は血中α1酸性糖蛋白質濃度に依存）</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+        <td class="center">○</td>
+      </tr>
+      <tr>
+        <td>パクリタキセル（PTX）<br>nab-PTX含む</td>
+        <td colspan="4">腎機能正常者と同じ（主に肝代謝）</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+      </tr>
+      <tr>
+        <td class="cat">ビンカ<br>アルカロイド</td>
+        <td>ビノレルビン（VNR）</td>
+        <td colspan="4">腎機能正常者と同じ（主に肝代謝）</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+        <td class="center">○</td>
+      </tr>
+      <tr>
+        <td class="cat" rowspan="3">分子標的薬<br>（TKI）</td>
+        <td>ゲフィチニブ（GEF）</td>
+        <td colspan="4">腎機能正常者と同じ（腎排泄の寄与が少ない）</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+        <td class="center">×</td>
+      </tr>
+      <tr>
+        <td>エルロチニブ（ERL）</td>
+        <td colspan="4">腎機能正常者と同じ（腎排泄の寄与が少ない）</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+        <td class="center">×</td>
+      </tr>
+      <tr>
+        <td>クリゾチニブ（CRZ）</td>
+        <td colspan="4">腎機能正常者と同じ（腎排泄の寄与が少ない）</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+        <td class="center">×</td>
+      </tr>
+      <tr>
+        <td class="cat">抗体製剤</td>
+        <td>ベバシズマブ（BEV）</td>
+        <td colspan="4">腎機能正常者と同じ（抗体製剤のため腎排泄の影響を受けにくい）</td>
+        <td class="center">—</td>
+        <td class="center">—</td>
+        <td class="center">○</td>
+      </tr>
+      <tr>
+        <td class="cat">mTOR<br>阻害剤</td>
+        <td>エベロリムス（EVE）</td>
+        <td colspan="4">腎機能正常者と同じ（主に肝代謝）</td>
+        <td class="center">○</td>
+        <td class="center">—</td>
+        <td class="center">○</td>
+      </tr>
 
-</tbody>
-</table>
+    </tbody>
+  </table>
 
-<div class="legend">
-  <b>【凡例】</b><br>
-  <dl>
-    <dt>重要度：</dt><dd>◎＝特に注意が必要 ／ ○＝注意が必要 ／ △＝やや注意</dd>
-    <dt>透析性：</dt><dd>○＝透析で除去される ／ ×＝透析で除去されない</dd>
-    <dt>腎障害禁忌：</dt><dd>禁＝重篤な腎障害に禁忌</dd><br>
-    <dt>背景色：</dt><dd><span style="background:#fce4ec;padding:1px 6px;">赤</span>＝禁忌・投与回避 ／ <span style="background:#fff8e1;padding:1px 6px;">黄</span>＝減量・注意が必要</dd>
-  </dl>
-</div>
+  <div class="legend">
+    <b>【凡例】</b><br>
+    <dl>
+      <dt>重要度：</dt>
+      <dd>◎＝特に注意が必要 ／ ○＝注意が必要 ／ △＝やや注意</dd>
+      <dt>透析性：</dt>
+      <dd>○＝透析で除去される ／ ×＝透析で除去されない</dd>
+      <dt>腎障害禁忌：</dt>
+      <dd>禁＝重篤な腎障害に禁忌</dd><br>
+      <dt>背景色：</dt>
+      <dd><span style="background:#fce4ec;padding:1px 6px;">赤</span>＝禁忌・投与回避 ／ <span
+          style="background:#fff8e1;padding:1px 6px;">黄</span>＝減量・注意が必要</dd>
+    </dl>
+  </div>
 
 </body>
+
 </html>
