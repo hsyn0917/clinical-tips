@@ -251,6 +251,7 @@
       <p class="result-placeholder">年齢・性別・体重・Cr を入力すると自動計算されます</p>
     </div>
     <p class="note">
+      eGFR = 194 × Cr<sup>−1.094</sup> × 年齢<sup>−0.287</sup>（女性は × 0.739）　体重不要・1.73m²標準化済み<br>
       CCr = (140 − 年齢) × 体重 / (72 × Cr)　（女性は × 0.85）<br>
       Cr + 0.2 補正は高齢者・筋肉量低下例でCrが過小評価される場合に使用。
     </p>
@@ -336,15 +337,22 @@
 
       const raw = cgCCr(age, sex, weight, cre);
       const adj = cgCCr(age, sex, weight, cre + 0.2);
+      const egfr = 194 * Math.pow(cre, -1.094) * Math.pow(age, -0.287) * (sex === 'female' ? 0.739 : 1.0);
 
       el.innerHTML = `
-        <div class="section-sub">素の Cr で計算</div>
+        <div class="section-sub">eGFR（日本腎臓学会式）</div>
+        <div class="result-row">
+          <span class="result-label">eGFR</span>
+          <span><span class="result-value">${egfr.toFixed(1)}</span><span class="result-unit">mL/min/1.73m²</span></span>
+        </div>
+        <hr class="divider">
+        <div class="section-sub">CCr（Cockcroft-Gault 式）— 素の Cr</div>
         <div class="result-row">
           <span class="result-label">CCr（実測 Cr ${cre.toFixed(2)} mg/dL）</span>
           <span><span class="result-value">${raw.toFixed(1)}</span><span class="result-unit">mL/min</span></span>
         </div>
         <hr class="divider">
-        <div class="section-sub">Cr + 0.2 補正で計算（補正後 Cr: ${(cre + 0.2).toFixed(2)} mg/dL）</div>
+        <div class="section-sub">CCr（Cockcroft-Gault 式）— Cr + 0.2 補正（補正後 Cr: ${(cre + 0.2).toFixed(2)} mg/dL）</div>
         <div class="result-row">
           <span class="result-label">CCr（Cr + 0.2 補正）</span>
           <span><span class="result-value orange">${adj.toFixed(1)}</span><span class="result-unit">mL/min</span></span>
