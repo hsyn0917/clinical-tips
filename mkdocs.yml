@@ -17,6 +17,8 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: ライトモードに切替
+  icon:
+    logo: fontawesome/solid/stethoscope
   font:
     text: Noto Sans JP
     code: Roboto Mono
