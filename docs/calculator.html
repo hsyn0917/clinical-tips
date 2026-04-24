@@ -19,7 +19,7 @@
       color: #1a3c6e;
       border-bottom: 2px solid #1a3c6e;
       padding-bottom: 6px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     h2 {
@@ -30,20 +30,25 @@
       margin: 0 0 14px 0;
     }
 
-    .card {
-      background: #fff;
-      border: 1px solid #d0d8e4;
+    /* ── 入力カード ── */
+    .input-card {
+      background: #1a3c6e;
       border-radius: 8px;
-      padding: 18px 20px;
+      padding: 16px 20px;
       margin-bottom: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .input-card h2 {
+      color: #fff;
+      border-left-color: #7eb8e8;
+      margin-bottom: 12px;
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
-      margin-bottom: 14px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
     }
 
     .form-group {
@@ -52,65 +57,57 @@
       gap: 4px;
     }
 
-    label {
-      font-size: 12px;
-      color: #555;
+    .input-card label {
+      font-size: 11px;
+      color: #b8d0ef;
       font-weight: bold;
     }
 
-    input[type="number"], select {
+    .input-card input[type="number"],
+    .input-card select {
       padding: 8px 10px;
-      border: 1px solid #bbb;
+      border: 1px solid #4a6a9e;
       border-radius: 5px;
       font-size: 14px;
       width: 100%;
       box-sizing: border-box;
       background: #fff;
+      color: #222;
     }
 
-    input[type="number"]:focus, select:focus {
+    .input-card input[type="number"]:focus,
+    .input-card select:focus {
       outline: none;
-      border-color: #1a3c6e;
-      box-shadow: 0 0 0 2px rgba(26,60,110,0.15);
+      border-color: #7eb8e8;
+      box-shadow: 0 0 0 2px rgba(126,184,232,0.4);
     }
 
-    button {
-      background: #1a3c6e;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 9px 22px;
-      font-size: 14px;
-      cursor: pointer;
-      font-family: inherit;
+    /* ── 結果カード ── */
+    .card {
+      background: #fff;
+      border: 1px solid #d0d8e4;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
 
-    button:hover {
-      background: #25518f;
-    }
-
-    .result-box {
-      margin-top: 14px;
-      background: #eef3fa;
-      border: 1px solid #b5c9e8;
-      border-radius: 6px;
-      padding: 14px 16px;
-      display: none;
-    }
-
-    .result-box.show {
-      display: block;
+    .result-placeholder {
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+      padding: 8px 0;
     }
 
     .result-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 5px 0;
-      border-bottom: 1px dashed #c5d5ea;
+      padding: 6px 0;
+      border-bottom: 1px dashed #d8e4f0;
     }
 
-    .result-row:last-child {
+    .result-row:last-of-type {
       border-bottom: none;
     }
 
@@ -120,12 +117,12 @@
     }
 
     .result-value {
-      font-size: 17px;
+      font-size: 20px;
       font-weight: bold;
       color: #1a3c6e;
     }
 
-    .result-value.highlight {
+    .result-value.orange {
       color: #b34000;
     }
 
@@ -135,42 +132,93 @@
       margin-left: 4px;
     }
 
-    .note {
+    .section-sub {
       font-size: 11px;
-      color: #777;
-      margin-top: 10px;
-      line-height: 1.7;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #e0e0e0;
-      margin: 4px 0 10px;
-    }
-
-    .section-divider {
-      margin: 6px 0;
-      font-size: 12px;
       color: #888;
+      font-weight: bold;
+      margin: 8px 0 2px;
+    }
+
+    .section-sub:first-child {
+      margin-top: 0;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid #e8edf5;
+      margin: 8px 0;
+    }
+
+    /* CBDCA AUC 入力 */
+    .cbdca-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .cbdca-inputs label {
+      font-size: 12px;
+      color: #555;
       font-weight: bold;
     }
 
-    @media (max-width: 480px) {
-      body { padding: 10px; }
-      .form-grid { grid-template-columns: 1fr 1fr; }
+    .cbdca-inputs select {
+      padding: 8px 10px;
+      border: 1px solid #bbb;
+      border-radius: 5px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+      background: #fff;
+    }
+
+    .cbdca-inputs select:focus {
+      outline: none;
+      border-color: #1a3c6e;
+      box-shadow: 0 0 0 2px rgba(26,60,110,0.15);
+    }
+
+    .note {
+      font-size: 11px;
+      color: #777;
+      margin-top: 12px;
+      line-height: 1.8;
+    }
+
+    .cap-badge {
+      display: inline-block;
+      background: #fff3e0;
+      border: 1px solid #e8a040;
+      color: #9a5000;
+      font-size: 11px;
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-left: 6px;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 400px) {
+      .form-grid { grid-template-columns: repeat(2, 1fr); }
+      .cbdca-inputs { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <h1>臨床計算機</h1>
 
-  <!-- CCr Calculator -->
-  <div class="card">
-    <h2>CCr 計算（Cockcroft-Gault 式）</h2>
+  <!-- 共通入力エリア -->
+  <div class="input-card">
+    <h2>患者情報の入力</h2>
     <div class="form-grid">
       <div class="form-group">
         <label for="age">年齢（歳）</label>
-        <input type="number" id="age" min="1" max="120" placeholder="例: 65">
+        <input type="number" id="age" min="1" max="120" placeholder="65">
       </div>
       <div class="form-group">
         <label for="sex">性別</label>
@@ -180,108 +228,48 @@
         </select>
       </div>
       <div class="form-group">
+        <label for="height">身長（cm）</label>
+        <input type="number" id="height" min="50" max="250" step="0.1" placeholder="165">
+      </div>
+      <div class="form-group">
         <label for="weight">体重（kg）</label>
-        <input type="number" id="weight" min="1" max="300" step="0.1" placeholder="例: 60">
+        <input type="number" id="weight" min="1" max="300" step="0.1" placeholder="60">
       </div>
       <div class="form-group">
         <label for="cre">血清 Cr（mg/dL）</label>
-        <input type="number" id="cre" min="0.01" max="30" step="0.01" placeholder="例: 0.80">
+        <input type="number" id="cre" min="0.01" max="30" step="0.01" placeholder="0.80">
       </div>
-    </div>
-    <button onclick="calcCCr()">計算</button>
-
-    <div class="result-box" id="ccr-result">
-      <div class="section-divider">素の Cr で計算</div>
-      <div class="result-row">
-        <span class="result-label">CCr（実測 Cr）</span>
-        <span>
-          <span class="result-value" id="ccr-raw">—</span>
-          <span class="result-unit">mL/min</span>
-        </span>
-      </div>
-      <hr class="divider">
-      <div class="section-divider">Cr + 0.2 補正で計算</div>
-      <div class="result-row">
-        <span class="result-label">CCr（Cr + 0.2 補正）</span>
-        <span>
-          <span class="result-value highlight" id="ccr-adj">—</span>
-          <span class="result-unit">mL/min</span>
-        </span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">補正後 Cr 値</span>
-        <span>
-          <span class="result-value" id="cre-adj-val" style="font-size:14px; color:#555;">—</span>
-          <span class="result-unit">mg/dL</span>
-        </span>
-      </div>
-      <p class="note">
-        CG式: CCr = (140 − 年齢) × 体重 / (72 × Cr)　（女性は × 0.85）<br>
-        Cr + 0.2 補正は高齢者・筋肉量低下例でCrが過小評価される場合に使用。
-      </p>
     </div>
   </div>
 
-  <!-- BSA Calculator -->
+  <!-- CCr 結果 -->
   <div class="card">
-    <h2>体表面積（BSA）計算</h2>
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="bsa-height">身長（cm）</label>
-        <input type="number" id="bsa-height" min="50" max="250" step="0.1" placeholder="例: 165">
-      </div>
-      <div class="form-group">
-        <label for="bsa-weight">体重（kg）</label>
-        <input type="number" id="bsa-weight" min="1" max="300" step="0.1" placeholder="例: 60">
-      </div>
+    <h2>CCr（Cockcroft-Gault 式）</h2>
+    <div id="ccr-result">
+      <p class="result-placeholder">年齢・性別・体重・Cr を入力すると自動計算されます</p>
     </div>
-    <button onclick="calcBSA()">計算</button>
-
-    <div class="result-box" id="bsa-result">
-      <div class="result-row">
-        <span class="result-label">BSA（DuBois式）</span>
-        <span>
-          <span class="result-value" id="bsa-dubois">—</span>
-          <span class="result-unit">m²</span>
-        </span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">BSA（Mosteller式）</span>
-        <span>
-          <span class="result-value" id="bsa-mosteller">—</span>
-          <span class="result-unit">m²</span>
-        </span>
-      </div>
-      <p class="note">
-        DuBois式: BSA = 0.007184 × 身長<sup>0.725</sup> × 体重<sup>0.425</sup><br>
-        Mosteller式: BSA = √(身長 × 体重 / 3600)
-      </p>
-    </div>
+    <p class="note">
+      CCr = (140 − 年齢) × 体重 / (72 × Cr)　（女性は × 0.85）<br>
+      Cr + 0.2 補正は高齢者・筋肉量低下例でCrが過小評価される場合に使用。
+    </p>
   </div>
 
-  <!-- Carboplatin AUC Calculator -->
+  <!-- BSA 結果 -->
+  <div class="card">
+    <h2>体表面積（BSA）</h2>
+    <div id="bsa-result">
+      <p class="result-placeholder">身長・体重を入力すると自動計算されます</p>
+    </div>
+    <p class="note">
+      DuBois式: BSA = 0.007184 × 身長<sup>0.725</sup> × 体重<sup>0.425</sup><br>
+      Mosteller式: BSA = √(身長 × 体重 / 3600)
+    </p>
+  </div>
+
+  <!-- CBDCA 結果 -->
   <div class="card">
     <h2>Carboplatin（CBDCA）用量計算（Calvert 式）</h2>
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="cbdca-age">年齢（歳）</label>
-        <input type="number" id="cbdca-age" min="1" max="120" placeholder="例: 65">
-      </div>
-      <div class="form-group">
-        <label for="cbdca-sex">性別</label>
-        <select id="cbdca-sex">
-          <option value="male">男性</option>
-          <option value="female">女性</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="cbdca-weight">体重（kg）</label>
-        <input type="number" id="cbdca-weight" min="1" max="300" step="0.1" placeholder="例: 60">
-      </div>
-      <div class="form-group">
-        <label for="cbdca-cre">血清 Cr（mg/dL）</label>
-        <input type="number" id="cbdca-cre" min="0.01" max="30" step="0.01" placeholder="例: 0.80">
-      </div>
+    <div class="cbdca-inputs">
       <div class="form-group">
         <label for="cbdca-auc">目標 AUC</label>
         <select id="cbdca-auc">
@@ -300,114 +288,133 @@
         </select>
       </div>
     </div>
-    <button onclick="calcCBDCA()">計算</button>
-
-    <div class="result-box" id="cbdca-result">
-      <div class="result-row">
-        <span class="result-label">使用 CCr（GFR）</span>
-        <span>
-          <span class="result-value" id="cbdca-ccr-used" style="font-size:15px; color:#555;">—</span>
-          <span class="result-unit">mL/min</span>
-        </span>
-      </div>
-      <div class="result-row">
-        <span class="result-label" id="cbdca-dose-label">CBDCA 用量（AUC 5）</span>
-        <span>
-          <span class="result-value" id="cbdca-dose">—</span>
-          <span class="result-unit">mg</span>
-        </span>
-      </div>
-      <p class="note" id="cbdca-note"></p>
-      <p class="note">
-        Calvert式: 用量(mg) = AUC × (GFR + 25)<br>
-        GFRはCockcroft-Gault式によるCCrを使用。<br>
-        ※ 最大 GFR 125 mL/min にキャップしていません（施設ポリシーに従うこと）。
-      </p>
+    <div id="cbdca-result">
+      <p class="result-placeholder">患者情報と AUC を入力すると自動計算されます</p>
     </div>
+    <p class="note">
+      Calvert式: 用量(mg) = AUC × (GFR + 25)　GFRはCG式によるCCrを使用。<br>
+      <strong>GFR 上限は 125 mL/min でキャップ（過大投与防止）。</strong>
+    </p>
   </div>
 
   <script>
-    function calcCCr() {
-      const age = parseFloat(document.getElementById('age').value);
-      const sex = document.getElementById('sex').value;
-      const weight = parseFloat(document.getElementById('weight').value);
-      const cre = parseFloat(document.getElementById('cre').value);
+    const ids = ['age', 'sex', 'height', 'weight', 'cre'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', recalcAll);
+      el.addEventListener('change', recalcAll);
+    });
+    document.getElementById('cbdca-auc').addEventListener('change', recalcCBDCA);
+    document.getElementById('cbdca-cr-method').addEventListener('change', recalcCBDCA);
+
+    function getInputs() {
+      return {
+        age:    parseFloat(document.getElementById('age').value),
+        sex:    document.getElementById('sex').value,
+        height: parseFloat(document.getElementById('height').value),
+        weight: parseFloat(document.getElementById('weight').value),
+        cre:    parseFloat(document.getElementById('cre').value),
+      };
+    }
+
+    function cgCCr(age, sex, weight, cre) {
+      const f = sex === 'female' ? 0.85 : 1.0;
+      return (140 - age) * weight / (72 * cre) * f;
+    }
+
+    function recalcAll() {
+      recalcCCr();
+      recalcBSA();
+      recalcCBDCA();
+    }
+
+    function recalcCCr() {
+      const { age, sex, weight, cre } = getInputs();
+      const el = document.getElementById('ccr-result');
 
       if ([age, weight, cre].some(isNaN) || age <= 0 || weight <= 0 || cre <= 0) {
-        alert('年齢・体重・Cr を正しく入力してください。');
+        el.innerHTML = '<p class="result-placeholder">年齢・性別・体重・Cr を入力すると自動計算されます</p>';
         return;
       }
 
-      const sexFactor = sex === 'female' ? 0.85 : 1.0;
-      const ccrRaw = (140 - age) * weight / (72 * cre) * sexFactor;
-      const creAdj = cre + 0.2;
-      const ccrAdj = (140 - age) * weight / (72 * creAdj) * sexFactor;
+      const raw = cgCCr(age, sex, weight, cre);
+      const adj = cgCCr(age, sex, weight, cre + 0.2);
 
-      document.getElementById('ccr-raw').textContent = ccrRaw.toFixed(1);
-      document.getElementById('ccr-adj').textContent = ccrAdj.toFixed(1);
-      document.getElementById('cre-adj-val').textContent = creAdj.toFixed(2);
-
-      document.getElementById('ccr-result').classList.add('show');
+      el.innerHTML = `
+        <div class="section-sub">素の Cr で計算</div>
+        <div class="result-row">
+          <span class="result-label">CCr（実測 Cr ${cre.toFixed(2)} mg/dL）</span>
+          <span><span class="result-value">${raw.toFixed(1)}</span><span class="result-unit">mL/min</span></span>
+        </div>
+        <hr class="divider">
+        <div class="section-sub">Cr + 0.2 補正で計算（補正後 Cr: ${(cre + 0.2).toFixed(2)} mg/dL）</div>
+        <div class="result-row">
+          <span class="result-label">CCr（Cr + 0.2 補正）</span>
+          <span><span class="result-value orange">${adj.toFixed(1)}</span><span class="result-unit">mL/min</span></span>
+        </div>
+      `;
     }
 
-    function calcBSA() {
-      const height = parseFloat(document.getElementById('bsa-height').value);
-      const weight = parseFloat(document.getElementById('bsa-weight').value);
+    function recalcBSA() {
+      const { height, weight } = getInputs();
+      const el = document.getElementById('bsa-result');
 
       if ([height, weight].some(isNaN) || height <= 0 || weight <= 0) {
-        alert('身長・体重を正しく入力してください。');
+        el.innerHTML = '<p class="result-placeholder">身長・体重を入力すると自動計算されます</p>';
         return;
       }
 
-      const dubois = 0.007184 * Math.pow(height, 0.725) * Math.pow(weight, 0.425);
+      const dubois    = 0.007184 * Math.pow(height, 0.725) * Math.pow(weight, 0.425);
       const mosteller = Math.sqrt(height * weight / 3600);
 
-      document.getElementById('bsa-dubois').textContent = dubois.toFixed(2);
-      document.getElementById('bsa-mosteller').textContent = mosteller.toFixed(2);
-
-      document.getElementById('bsa-result').classList.add('show');
+      el.innerHTML = `
+        <div class="result-row">
+          <span class="result-label">BSA（DuBois式）</span>
+          <span><span class="result-value">${dubois.toFixed(2)}</span><span class="result-unit">m²</span></span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">BSA（Mosteller式）</span>
+          <span><span class="result-value">${mosteller.toFixed(2)}</span><span class="result-unit">m²</span></span>
+        </div>
+      `;
     }
 
-    function calcCBDCA() {
-      const age = parseFloat(document.getElementById('cbdca-age').value);
-      const sex = document.getElementById('cbdca-sex').value;
-      const weight = parseFloat(document.getElementById('cbdca-weight').value);
-      const cre = parseFloat(document.getElementById('cbdca-cre').value);
-      const auc = parseFloat(document.getElementById('cbdca-auc').value);
+    function recalcCBDCA() {
+      const { age, sex, weight, cre } = getInputs();
+      const auc      = parseFloat(document.getElementById('cbdca-auc').value);
       const crMethod = document.getElementById('cbdca-cr-method').value;
+      const el       = document.getElementById('cbdca-result');
 
       if ([age, weight, cre].some(isNaN) || age <= 0 || weight <= 0 || cre <= 0) {
-        alert('年齢・体重・Cr を正しく入力してください。');
+        el.innerHTML = '<p class="result-placeholder">患者情報と AUC を入力すると自動計算されます</p>';
         return;
       }
 
-      const sexFactor = sex === 'female' ? 0.85 : 1.0;
-      const creUsed = crMethod === 'adj' ? cre + 0.2 : cre;
-      const ccr = (140 - age) * weight / (72 * creUsed) * sexFactor;
-      const dose = auc * (ccr + 25);
+      const creUsed  = crMethod === 'adj' ? cre + 0.2 : cre;
+      const ccrRaw   = cgCCr(age, sex, weight, creUsed);
+      const ccrCapped = Math.min(ccrRaw, 125);
+      const dose     = auc * (ccrCapped + 25);
+      const isCapped = ccrRaw > 125;
 
-      document.getElementById('cbdca-ccr-used').textContent = ccr.toFixed(1);
-      document.getElementById('cbdca-dose').textContent = Math.round(dose);
-      document.getElementById('cbdca-dose-label').textContent = `CBDCA 用量（AUC ${auc}）`;
+      const crLabel = crMethod === 'adj'
+        ? `補正Cr ${creUsed.toFixed(2)} mg/dL（実測 ${cre.toFixed(2)} + 0.2）`
+        : `実測Cr ${cre.toFixed(2)} mg/dL`;
 
-      const adjNote = crMethod === 'adj'
-        ? `補正Cr = ${creUsed.toFixed(2)} mg/dL（実測 ${cre.toFixed(2)} + 0.2）を使用。`
-        : `実測Cr = ${cre.toFixed(2)} mg/dL を使用。`;
-      document.getElementById('cbdca-note').textContent = adjNote;
+      const capBadge = isCapped
+        ? `<span class="cap-badge">125 にキャップ（計算値: ${ccrRaw.toFixed(1)}）</span>`
+        : '';
 
-      document.getElementById('cbdca-result').classList.add('show');
+      el.innerHTML = `
+        <div class="result-row">
+          <span class="result-label">使用 GFR（CCr）${capBadge}</span>
+          <span><span class="result-value" style="font-size:16px; color:#555;">${ccrCapped.toFixed(1)}</span><span class="result-unit">mL/min</span></span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">CBDCA 用量（AUC ${auc}、${crLabel}）</span>
+          <span><span class="result-value">${Math.round(dose)}</span><span class="result-unit">mg</span></span>
+        </div>
+      `;
     }
-
-    // Allow Enter key to trigger calculation in each section
-    document.addEventListener('keydown', function(e) {
-      if (e.key !== 'Enter') return;
-      const focused = document.activeElement;
-      if (!focused) return;
-      const card = focused.closest('.card');
-      if (!card) return;
-      const btn = card.querySelector('button');
-      if (btn) btn.click();
-    });
   </script>
 </body>
 </html>
