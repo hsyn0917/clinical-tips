@@ -62,4 +62,5 @@ nav:
   - 画像からの鑑別:
     - 多発空洞性結節: cavitary-nodule.md
   - 臨床計算機: calculator.html
+  - CTCAE v5/v6 検索: ctcae.html
   - 運用ルール: operations.md
