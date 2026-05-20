@@ -59,6 +59,9 @@ nav:
   - がん性疼痛・オピオイド: opioid-cancer-pain.md
   - 抗癌剤の腎機能調整: chemo-renal-dose.html
   - IP合併肺癌の化学療法: ip-lung-cancer.md
+  - 抗癌剤の開始・中止・減量基準:
+    - 高齢者CRT (daily CBDCA+TRT): elderly-crt-cbdca.md
+    - CBDCA + nab-PTX (NSCLC・B法): chemo-criteria-cbdca-nabptx.md
   - 在宅NPPV：適応と設定: nppv.md
   - 画像からの鑑別:
     - 多発空洞性結節: cavitary-nodule.md
