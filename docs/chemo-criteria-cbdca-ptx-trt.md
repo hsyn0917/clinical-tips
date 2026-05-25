@@ -2,6 +2,9 @@
 
 出典：WJTOG0105 試験（Yamamoto N, et al. *J Clin Oncol.* 2010）
 
+!!! note "WJTOG0105 試験の概要"
+    WJTOG0105は、切除不能III期NSCLCに対する同時胸部放射線療法（TRT 60 Gy）併用化学療法として、第2世代レジメンのMVP療法（MMC 8 mg/m² day 1、VDS 3 mg/m² day 1・8、CDDP 80 mg/m² day 1）を対照に、第3世代レジメンの weekly CPT-11/CBDCA および weekly PTX/CBDCA を比較した第III相試験である。Primary outcomeでは第3世代レジメンの非劣性は証明されなかったものの、weekly PTX/CBDCA群は生存期間がMVP群と同等で、毒性プロファイルがより軽微であった。
+
 ---
 
 ## 対象レジメン
