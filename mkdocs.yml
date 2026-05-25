@@ -48,25 +48,29 @@ extra_css:
   - stylesheets/extra.css
 
 nav:
-  - めまい: dizziness.md
-  - 胸痛: chest-pain.md
-  - 低K血症: hypokalemia.md
-  - 栄養管理: nutrition.md
-  - 好中球減少性腸炎: neutropenic-enterocolitis.md
-  - 肺炎球菌ワクチン: pneumococcal-vaccine.md
-  - 精巣腫瘍・胚細胞腫瘍: germ-cell-tumor.md
-  - CDI: cdi.md
-  - がん性疼痛・オピオイド: opioid-cancer-pain.md
-  - 抗癌剤の腎機能調整: chemo-renal-dose.html
-  - IP合併肺癌の化学療法: ip-lung-cancer.md
-  - 抗癌剤の開始・中止・減量基準:
-    - 高齢者CRT (daily CBDCA+TRT): elderly-crt-cbdca.md
-    - CBDCA + PTX + TRT (WJTOG0105): chemo-criteria-cbdca-ptx-trt.md
-    - CBDCA + nab-PTX (NSCLC・B法): chemo-criteria-cbdca-nabptx.md
-    - レットヴィモ（セルペルカチニブ）過敏症: selpercatinib-hypersensitivity.md
-  - 在宅NPPV：適応と設定: nppv.md
+  - 症状・救急:
+    - めまい: dizziness.md
+    - 胸痛: chest-pain.md
+    - 低K血症: hypokalemia.md
+    - 在宅NPPV：適応と設定: nppv.md
+  - 感染症・支持療法:
+    - CDI: cdi.md
+    - 好中球減少性腸炎: neutropenic-enterocolitis.md
+    - 肺炎球菌ワクチン: pneumococcal-vaccine.md
+    - 栄養管理: nutrition.md
+    - がん性疼痛・オピオイド: opioid-cancer-pain.md
+  - 腫瘍内科:
+    - 精巣腫瘍・胚細胞腫瘍: germ-cell-tumor.md
+    - IP合併肺癌の化学療法: ip-lung-cancer.md
+    - 抗癌剤の腎機能調整: chemo-renal-dose.html
+    - 抗癌剤の開始・中止・減量基準:
+      - 高齢者CRT (daily CBDCA+TRT): elderly-crt-cbdca.md
+      - CBDCA + PTX + TRT (WJTOG0105): chemo-criteria-cbdca-ptx-trt.md
+      - CBDCA + nab-PTX (NSCLC・B法): chemo-criteria-cbdca-nabptx.md
+      - レットヴィモ（セルペルカチニブ）過敏症: selpercatinib-hypersensitivity.md
+    - 臨床計算機: calculator.html
+    - CTCAE v5/v6 検索: ctcae.html
   - 画像からの鑑別:
     - 多発空洞性結節: cavitary-nodule.md
-  - 臨床計算機: calculator.html
-  - CTCAE v5/v6 検索: ctcae.html
-  - 運用ルール: operations.md
+  - 運用:
+    - 運用ルール: operations.md
