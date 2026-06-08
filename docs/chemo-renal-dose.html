@@ -21,6 +21,22 @@
       margin-bottom: 8px;
     }
 
+    h2 {
+      font-size: 15px;
+      color: #1a3c6e;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 8px;
+      margin-top: 26px;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 13px;
+      color: #1a3c6e;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
     .note {
       font-size: 11px;
       color: #555;
@@ -77,6 +93,54 @@
 
     .bold {
       font-weight: bold;
+    }
+
+    .drug-link {
+      color: #1a3c6e;
+      text-decoration: none;
+      border-bottom: 1px dotted #1a3c6e;
+    }
+
+    .detail-section {
+      margin-top: 20px;
+      border-top: 2px solid #d6e4f0;
+      padding-top: 4px;
+    }
+
+    .summary-box {
+      background: #f5f8fb;
+      border: 1px solid #c9d8e8;
+      border-left: 4px solid #1a3c6e;
+      padding: 8px 10px;
+      margin: 8px 0 12px;
+      line-height: 1.7;
+    }
+
+    .summary-box ul {
+      margin: 4px 0 0 18px;
+      padding: 0;
+    }
+
+    .detail-table {
+      table-layout: auto;
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+
+    .detail-table th {
+      width: 30%;
+    }
+
+    .detail-table tr.dose-ok td {
+      background: #e8f5e9;
+    }
+
+    .detail-table tr.dose-caution td {
+      background: #fff8e1;
+    }
+
+    .detail-table tr.dose-consult td {
+      background: #fce4ec;
     }
 
     .sub-section {
@@ -150,7 +214,8 @@
 
   <h1>肺癌で使用する主な抗癌剤の腎機能低下時の投与量一覧</h1>
   <div class="note">
-    出典：腎機能低下時の主な薬剤投与量一覧 改訂37版（2014年2月28日）より肺癌関連薬剤を抜粋<br>
+    出典：腎機能低下時の主な薬剤投与量一覧 改訂38版（2014年5月）より肺癌関連薬剤を抜粋<br>
+    ADDIKDを併記する薬剤では、CCr基準とeGFR基準を混同しないよう薬剤別詳細に分けて記載。<br>
     ※最新の添付文書・ガイドラインも併せてご確認ください
   </div>
 
@@ -210,7 +275,7 @@
       <!-- ===== 代謝拮抗剤 ===== -->
       <tr>
         <td class="cat" rowspan="3">代謝<br>拮抗剤</td>
-        <td class="bold">ペメトレキセド<br>（PEM）</td>
+        <td class="bold"><a class="drug-link" href="#pemetrexed">ペメトレキセド<br>（PEM）</a></td>
         <td>1日1回500mg/m²を10分間かけて点滴静注、少なくとも20日間休薬</td>
         <td class="warn">CCr≧45: 腎機能正常者と同じ。<b>CCr＜45:</b> 重度の腎機能障害患者で、本剤に起因したと考えられる死亡が報告されているので、投与しないことが望ましい（十分な情報なし）
         </td>
@@ -220,7 +285,7 @@
         <td class="center">不明</td>
       </tr>
       <tr>
-        <td class="bold">ゲムシタビン<br>（GEM）</td>
+        <td class="bold"><a class="drug-link" href="#gemcitabine">ゲムシタビン<br>（GEM）</a></td>
         <td>週1回1,000mg/m²<br>3週連続投与<br>4週目休薬</td>
         <td colspan="2">腎機能正常者と同じだが、代謝物dFdUのCLが低下するため慎重投与</td>
         <td>代謝物dFdUのCLが低下するが透析性は高いため用量調節不要。ただし慎重投与</td>
@@ -339,6 +404,166 @@
       <dd><span style="background:#fce4ec;padding:1px 6px;">赤</span>＝禁忌・投与回避 ／ <span
           style="background:#fff8e1;padding:1px 6px;">黄</span>＝減量・注意が必要</dd>
     </dl>
+  </div>
+
+  <div class="detail-section">
+    <h2 id="pemetrexed">ペメトレキセド（PEM）</h2>
+
+    <div class="summary-box">
+      <b>要約：</b>ペメトレキセドは主に腎排泄され、投与後24時間以内に70-90%が未変化体として尿中排泄される。
+      腎機能低下では全身クリアランス・腎クリアランスが低下し、半減期延長とAUC上昇が起こるため、特にeGFR＜45 mL/min/1.73 m²では血液毒性、消化管毒性、腎障害のリスクが上昇する。
+      ADDIKDではeGFR 45-59は通常量、30-44は20%減量または代替治療の検討、30未満は回避を推奨する。
+      葉酸・ビタミンB12補充、NSAIDsなど腎排泄を阻害する薬剤や腎毒性薬の回避、胸腹水などthird-space effusionの処置を確認する。
+    </div>
+
+    <h3>元表：腎機能低下時の主な薬剤投与量一覧 改訂38版（2014年5月）</h3>
+    <table class="detail-table">
+      <thead>
+        <tr>
+          <th>腎機能</th>
+          <th>推奨・注意</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="dose-ok">
+          <td>CCr＞50 mL/min</td>
+          <td>1日1回500 mg/m²を10分間かけて点滴静注、少なくとも20日間休薬。</td>
+        </tr>
+        <tr class="dose-ok">
+          <td>CCr 45-50 mL/min</td>
+          <td>腎機能正常者と同じ。</td>
+        </tr>
+        <tr class="dose-consult">
+          <td>CCr＜45 mL/min</td>
+          <td>重度の腎機能障害患者で、本剤に起因したと考えられる死亡が報告されているため、投与しないことが望ましい。</td>
+        </tr>
+        <tr class="dose-consult">
+          <td>CCr＜10 mL/min</td>
+          <td>禁忌。</td>
+        </tr>
+        <tr class="dose-consult">
+          <td>血液透析</td>
+          <td>禁忌。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>ADDIKD：eGFR別ペメトレキセド投与量推奨</h3>
+    <table class="detail-table">
+      <thead>
+        <tr>
+          <th>eGFR（mL/min/1.73 m²）</th>
+          <th>推奨・注意</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="dose-ok">
+          <td>≥60</td>
+          <td>通常量。葉酸・ビタミンB12補充、腎排泄を阻害する薬剤/腎毒性薬の回避、third-space effusionの処置を確認。</td>
+        </tr>
+        <tr class="dose-caution">
+          <td>45-59</td>
+          <td>通常量。血液毒性、消化管毒性、腎障害などの有害事象リスク上昇に注意。</td>
+        </tr>
+        <tr class="dose-caution">
+          <td>30-44</td>
+          <td>非治癒目的、PS不良、腎毒性薬併用がある場合は代替治療を検討。それ以外では20%減量を検討。有害事象リスク上昇に注意。</td>
+        </tr>
+        <tr class="dose-consult">
+          <td>15-29</td>
+          <td>推奨しない。臨床的に適切な代替治療プロトコールを使用する。</td>
+        </tr>
+        <tr class="dose-consult">
+          <td>＜15、腎代替療法なし</td>
+          <td>推奨しない。臨床的に適切な代替治療プロトコールを使用する。</td>
+        </tr>
+        <tr class="dose-consult">
+          <td>腎代替療法中</td>
+          <td>投与量管理について、腫瘍内科／血液内科、腎臓内科、および／または臨床薬理の専門家からなる多職種チームに相談する。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      PEM個別表の色分け：緑＝通常量、黄＝通常量だが注意または減量/代替を検討、赤＝回避・禁忌・多職種チームに相談。<br>
+      ADDIKDではeGFRを用いる。初回投与量に関する推奨であり、2コース目以降は初回投与量への忍容性も踏まえて判断する。
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <h2 id="gemcitabine">ゲムシタビン（GEM）</h2>
+
+    <div class="summary-box">
+      <b>要約：</b>ゲムシタビン自体の腎排泄は少ないが、主代謝物dFdUは主に腎排泄されるため、腎機能低下ではdFdUのクリアランス低下・半減期延長・AUC上昇が起こり得る。
+      一方で、腎機能低下がゲムシタビン本体や活性代謝物の曝露・臨床毒性を明確に増やす根拠は限定的で、ADDIKDではeGFR 15-59 mL/min/1.73 m²でも初回減量は推奨せず通常量を基本とする。
+      ただし血球減少、肝酵素上昇、皮疹、まれなHUS/TMAを含む有害事象のモニタリングを強化し、eGFR＜15または腎代替療法中では多職種チームに相談する。
+    </div>
+
+    <h3>元表：腎機能低下時の主な薬剤投与量一覧 改訂38版（2014年5月）</h3>
+    <table class="detail-table">
+      <thead>
+        <tr>
+          <th>腎機能</th>
+          <th>推奨・注意</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="dose-ok">
+          <td>CCr＞50 mL/min</td>
+          <td>週1回1,000 mg/m²、3週連続投与、4週目休薬。</td>
+        </tr>
+        <tr class="dose-caution">
+          <td>CCr 10-50 mL/min</td>
+          <td>腎機能正常者と同じ。ただし、代謝物dFdUのクリアランスが低下するため慎重投与。</td>
+        </tr>
+        <tr class="dose-caution">
+          <td>CCr＜10 mL/min</td>
+          <td>腎機能正常者と同じ。ただし、代謝物dFdUのクリアランスが低下するため慎重投与。</td>
+        </tr>
+        <tr class="dose-caution">
+          <td>血液透析</td>
+          <td>代謝物dFdUのクリアランスが低下するが、透析性は高いため用量調節不要。ただし慎重投与。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>ADDIKD：eGFR別ゲムシタビン投与量推奨</h3>
+    <table class="detail-table">
+      <thead>
+        <tr>
+          <th>eGFR（mL/min/1.73 m²）</th>
+          <th>推奨・注意</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="dose-ok">
+          <td>≥60</td>
+          <td>通常量。</td>
+        </tr>
+        <tr class="dose-caution">
+          <td>45-59</td>
+          <td>通常量。有害事象リスクが上昇する可能性あり。</td>
+        </tr>
+        <tr class="dose-caution">
+          <td>30-44</td>
+          <td>通常量。有害事象リスクが上昇する可能性あり。</td>
+        </tr>
+        <tr class="dose-caution">
+          <td>15-29</td>
+          <td>通常量。有害事象リスクが上昇する可能性あり。</td>
+        </tr>
+        <tr class="dose-consult">
+          <td>＜15、腎代替療法なし</td>
+          <td>投与量管理について、腫瘍内科／血液内科、腎臓内科、および／または臨床薬理の専門家からなる多職種チームに相談する。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      GEM個別表の色分け：緑＝通常量、黄＝通常量だが慎重投与・有害事象モニタリング強化、赤＝多職種チームに相談。<br>
+      ADDIKDではeGFRを用いる。治療プロトコール内の1剤以上について使用回避が推奨される場合は、臨床的に適切な代替治療プロトコールを検討する。
+      薬剤の減量または省略を行う前に、治療目的を考慮する。
+    </div>
   </div>
 
 </body>
