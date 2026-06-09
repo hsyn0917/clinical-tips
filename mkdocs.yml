@@ -48,6 +48,9 @@ extra_css:
   - stylesheets/extra.css
 
 nav:
+  - クイックツール:
+    - 臨床計算機: calculator.html
+    - CTCAE v5/v6 検索: ctcae.html
   - 症状・救急:
     - めまい: dizziness.md
     - 胸痛: chest-pain.md
@@ -69,8 +72,6 @@ nav:
       - CBDCA + PTX + TRT (WJTOG0105): chemo-criteria-cbdca-ptx-trt.md
       - CBDCA + nab-PTX (NSCLC・B法): chemo-criteria-cbdca-nabptx.md
       - レットヴィモ（セルペルカチニブ）過敏症: selpercatinib-hypersensitivity.md
-    - CTCAE v5/v6 検索: ctcae.html
-  - 臨床計算機: calculator.html
   - 画像からの鑑別:
     - 多発空洞性結節: cavitary-nodule.md
   - 運用:
