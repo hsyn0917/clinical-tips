@@ -50,6 +50,7 @@ extra_css:
 nav:
   - クイックツール:
     - 臨床計算機: calculator.html
+    - オピオイド・ステロイド等価量換算: dose-converter.html
     - CTCAE v5/v6 検索: ctcae.html
   - 症状・救急:
     - めまい: dizziness.md

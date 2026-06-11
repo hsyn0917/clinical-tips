@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>オピオイド・ステロイド等価量換算</title>
+  <style>
+    :root {
+      --navy: #1a3c6e;
+      --blue: #1976d2;
+      --light-blue: #eaf4ff;
+      --green: #087f5b;
+      --light-green: #e9f7f1;
+      --orange: #b45309;
+      --light-orange: #fff7e6;
+      --border: #d5dde8;
+      --text: #243142;
+      --muted: #667085;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Hiragino Kaku Gothic Pro", "Yu Gothic", Meiryo, sans-serif;
+      font-size: 14px;
+      margin: 0;
+      padding: 16px;
+      color: var(--text);
+      background: #f6f8fb;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 20px;
+      color: var(--navy);
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 8px;
+      margin: 0 0 14px;
+    }
+
+    .lead {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 0 16px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tab-button {
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab-button.active {
+      border-color: var(--blue);
+      background: var(--light-blue);
+      color: var(--navy);
+      box-shadow: inset 0 -3px 0 var(--blue);
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .input-card {
+      background: var(--navy);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(20, 45, 80, 0.18);
+    }
+
+    .input-card h2 {
+      color: #fff;
+      font-size: 16px;
+      margin: 0 0 12px;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(130px, 1fr);
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      color: #c9dcf5;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    select,
+    input[type="number"] {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid #7892b6;
+      border-radius: 6px;
+      padding: 9px 10px;
+      background: #fff;
+      color: #172033;
+      font-size: 16px;
+    }
+
+    select:focus,
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #8ac7ff;
+      box-shadow: 0 0 0 3px rgba(138, 199, 255, 0.3);
+    }
+
+    .results-title {
+      color: var(--navy);
+      font-size: 16px;
+      margin: 18px 0 10px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .result-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 5px solid #8aa4c5;
+      border-radius: 8px;
+      padding: 13px 14px;
+      min-height: 108px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .result-card.source {
+      border-left-color: var(--blue);
+      background: var(--light-blue);
+    }
+
+    .result-generic {
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .result-product {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+      min-height: 32px;
+    }
+
+    .result-dose {
+      color: var(--navy);
+      font-size: 23px;
+      font-weight: 800;
+      margin-top: 5px;
+    }
+
+    .result-unit {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+      margin-left: 4px;
+    }
+
+    .reference {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .reference th,
+    .reference td {
+      border: 1px solid var(--border);
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .reference th {
+      background: #edf2f8;
+      color: var(--navy);
+    }
+
+    .notice {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      line-height: 1.7;
+      font-size: 12px;
+    }
+
+    .notice.warning {
+      border: 1px solid #e8b04f;
+      background: var(--light-orange);
+      color: #6f3b00;
+    }
+
+    .notice.info {
+      border: 1px solid #8dcdb7;
+      background: var(--light-green);
+      color: #145c47;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .sources {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+      margin: 16px 2px 0;
+    }
+
+    .sources a {
+      color: var(--blue);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+
+      .input-grid,
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-product {
+        min-height: auto;
+      }
+
+      .reference {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>オピオイド・ステロイド等価量換算</h1>
+    <p class="lead">製剤名と24時間量を入力すると、他製剤・一般名のおおよその等価量を自動計算します。</p>
+
+    <div class="tabs" role="tablist" aria-label="換算する薬剤群">
+      <button class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="opioid-panel" data-tab="opioid">オピオイド</button>
+      <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="steroid-panel" data-tab="steroid">ステロイド</button>
+    </div>
+
+    <section id="opioid-panel" class="panel active" role="tabpanel">
+      <div class="input-card">
+        <h2>現在使用しているオピオイド</h2>
+        <div class="input-grid">
+          <div class="form-group">
+            <label for="opioid-product">製剤名</label>
+            <select id="opioid-product"></select>
+          </div>
+          <div class="form-group">
+            <label for="opioid-dose">24時間総量</label>
+            <input type="number" id="opioid-dose" min="0" step="any" inputmode="decimal" placeholder="例：30">
+          </div>
+        </div>
+      </div>
+
+      <h2 class="results-title">等価量の目安</h2>
+      <div id="opioid-results" class="result-grid" aria-live="polite"></div>
+
+      <div class="notice warning">
+        <strong>オピオイド換算の注意</strong>
+        換算比は目安です。疼痛が安定している患者のスイッチングでは、交差耐性が不完全なため計算上の等価量から通常25〜50%の減量を検討し、疼痛・眠気・呼吸数を再評価します。メサドン、タペンタドール、ブプレノルフィン、突出痛用フェンタニル製剤には使用しません。
+      </div>
+
+      <table class="reference">
+        <thead>
+          <tr>
+            <th>基準</th>
+            <th>経口モルヒネ換算30 mg/日に相当</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>経口モルヒネ</td><td>30 mg/日</td></tr>
+          <tr><td>経口オキシコドン</td><td>20 mg/日</td></tr>
+          <tr><td>経口ヒドロモルフォン</td><td>6 mg/日</td></tr>
+          <tr><td>フェントステープ</td><td>1 mg製剤/日</td></tr>
+          <tr><td>フェンタニル注</td><td>0.3 mg/日</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="steroid-panel" class="panel" role="tabpanel">
+      <div class="input-card">
+        <h2>現在使用しているステロイド</h2>
+        <div class="input-grid">
+          <div class="form-group">
+            <label for="steroid-product">製剤名（一般名）</label>
+            <select id="steroid-product"></select>
+          </div>
+          <div class="form-group">
+            <label for="steroid-dose">24時間総量（mg）</label>
+            <input type="number" id="steroid-dose" min="0" step="any" inputmode="decimal" placeholder="例：5">
+          </div>
+        </div>
+      </div>
+
+      <h2 class="results-title">抗炎症作用の等価量</h2>
+      <div id="steroid-results" class="result-grid" aria-live="polite"></div>
+
+      <div class="notice info">
+        <strong>ステロイド換算の注意</strong>
+        全身投与時の抗炎症作用に基づく概算です。生物学的半減期、鉱質コルチコイド作用、投与経路、病態は同等ではありません。急な中止や漸減方法の判断には使用せず、長期投与中は副腎抑制を考慮します。
+      </div>
+
+      <table class="reference">
+        <thead>
+          <tr>
+            <th>一般名</th>
+            <th>代表的商品名</th>
+            <th>等価量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>ヒドロコルチゾン</td><td>コートリル、ソル・コーテフ</td><td>20 mg</td></tr>
+          <tr><td>プレドニゾロン</td><td>プレドニン</td><td>5 mg</td></tr>
+          <tr><td>メチルプレドニゾロン</td><td>メドロール、ソル・メドロール</td><td>4 mg</td></tr>
+          <tr><td>デキサメタゾン</td><td>デカドロン、デキサート</td><td>0.75 mg</td></tr>
+          <tr><td>ベタメタゾン</td><td>リンデロン</td><td>0.6 mg</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="sources">
+      換算根拠：オピオイドは日本緩和医療学会「がん疼痛の薬物療法に関するガイドライン 2020年版」および当サイトのがん性疼痛ページの換算表。ステロイドは
+      <a href="https://www.ncbi.nlm.nih.gov/books/NBK279156/" target="_blank" rel="noopener">Endotext: Glucocorticoid Therapy and Adrenal Suppression, Table 1</a>。
+      商品名は代表例であり、規格・剤形・販売状況は最新の電子添文を確認してください。
+    </p>
+  </main>
+
+  <script>
+    const opioidGroups = [
+      {
+        id: "morphine-po",
+        generic: "モルヒネ（経口）",
+        products: "MSコンチン錠、モルペス細粒、オプソ内服液など",
+        equivalent: 30,
+        unit: "mg/日"
+      },
+      {
+        id: "oxycodone-po",
+        generic: "オキシコドン（経口）",
+        products: "オキシコンチンTR錠、オキノーム散など",
+        equivalent: 20,
+        unit: "mg/日"
+      },
+      {
+        id: "hydromorphone-po",
+        generic: "ヒドロモルフォン（経口）",
+        products: "ナルサス錠、ナルラピド錠",
+        equivalent: 6,
+        unit: "mg/日"
+      },
+      {
+        id: "fentanyl-patch",
+        generic: "フェンタニル（貼付）",
+        products: "フェントステープ",
+        equivalent: 1,
+        unit: "mg製剤/日"
+      },
+      {
+        id: "fentanyl-injection",
+        generic: "フェンタニル（注射）",
+        products: "フェンタニル注射液",
+        equivalent: 0.3,
+        unit: "mg/日"
+      }
+    ];
+
+    const opioidProducts = [
+      ["MSコンチン錠（モルヒネ経口）", "morphine-po"],
+      ["モルペス細粒（モルヒネ経口）", "morphine-po"],
+      ["オプソ内服液（モルヒネ経口）", "morphine-po"],
+      ["オキシコンチンTR錠（オキシコドン経口）", "oxycodone-po"],
+      ["オキノーム散（オキシコドン経口）", "oxycodone-po"],
+      ["ナルサス錠（ヒドロモルフォン経口）", "hydromorphone-po"],
+      ["ナルラピド錠（ヒドロモルフォン経口）", "hydromorphone-po"],
+      ["フェントステープ（フェンタニル貼付）", "fentanyl-patch"],
+      ["フェンタニル注射液", "fentanyl-injection"]
+    ];
+
+    const steroidGroups = [
+      {
+        id: "hydrocortisone",
+        generic: "ヒドロコルチゾン",
+        products: "コートリル、ソル・コーテフ",
+        equivalent: 20,
+        unit: "mg/日"
+      },
+      {
+        id: "prednisolone",
+        generic: "プレドニゾロン",
+        products: "プレドニン",
+        equivalent: 5,
+        unit: "mg/日"
+      },
+      {
+        id: "methylprednisolone",
+        generic: "メチルプレドニゾロン",
+        products: "メドロール、ソル・メドロール",
+        equivalent: 4,
+        unit: "mg/日"
+      },
+      {
+        id: "dexamethasone",
+        generic: "デキサメタゾン",
+        products: "デカドロン、デキサート",
+        equivalent: 0.75,
+        unit: "mg/日"
+      },
+      {
+        id: "betamethasone",
+        generic: "ベタメタゾン",
+        products: "リンデロン",
+        equivalent: 0.6,
+        unit: "mg/日"
+      }
+    ];
+
+    const steroidProducts = [
+      ["コートリル錠（ヒドロコルチゾン）", "hydrocortisone"],
+      ["ソル・コーテフ注（ヒドロコルチゾン）", "hydrocortisone"],
+      ["プレドニン錠（プレドニゾロン）", "prednisolone"],
+      ["メドロール錠（メチルプレドニゾロン）", "methylprednisolone"],
+      ["ソル・メドロール注（メチルプレドニゾロン）", "methylprednisolone"],
+      ["デカドロン錠（デキサメタゾン）", "dexamethasone"],
+      ["デキサート注（デキサメタゾン）", "dexamethasone"],
+      ["リンデロン錠（ベタメタゾン）", "betamethasone"],
+      ["リンデロン注（ベタメタゾン）", "betamethasone"]
+    ];
+
+    function populateSelect(selectId, products) {
+      const select = document.getElementById(selectId);
+      products.forEach(([label, groupId]) => {
+        const option = document.createElement("option");
+        option.value = groupId;
+        option.textContent = label;
+        select.appendChild(option);
+      });
+    }
+
+    function formatDose(value) {
+      if (!Number.isFinite(value)) return "—";
+      if (value >= 100) return value.toFixed(0);
+      if (value >= 10) return value.toFixed(1).replace(/\.0$/, "");
+      if (value >= 1) return value.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+      return value.toFixed(3).replace(/0+$/, "").replace(/\.$/, "");
+    }
+
+    function renderResults(groupName) {
+      const isOpioid = groupName === "opioid";
+      const groups = isOpioid ? opioidGroups : steroidGroups;
+      const selectedId = document.getElementById(`${groupName}-product`).value;
+      const dose = Number(document.getElementById(`${groupName}-dose`).value);
+      const source = groups.find((item) => item.id === selectedId);
+      const results = document.getElementById(`${groupName}-results`);
+
+      results.innerHTML = "";
+
+      groups.forEach((target) => {
+        const card = document.createElement("article");
+        card.className = `result-card${target.id === selectedId ? " source" : ""}`;
+        const converted = source && dose > 0
+          ? dose * target.equivalent / source.equivalent
+          : NaN;
+
+        card.innerHTML = `
+          <div class="result-generic">${target.generic}</div>
+          <div class="result-product">${target.products}</div>
+          <div class="result-dose">
+            ${formatDose(converted)}
+            <span class="result-unit">${target.unit}</span>
+          </div>
+        `;
+        results.appendChild(card);
+      });
+    }
+
+    function activateTab(tabName) {
+      document.querySelectorAll(".tab-button").forEach((button) => {
+        const active = button.dataset.tab === tabName;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", String(active));
+      });
+
+      document.querySelectorAll(".panel").forEach((panel) => {
+        panel.classList.toggle("active", panel.id === `${tabName}-panel`);
+      });
+    }
+
+    populateSelect("opioid-product", opioidProducts);
+    populateSelect("steroid-product", steroidProducts);
+
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => activateTab(button.dataset.tab));
+    });
+
+    ["opioid", "steroid"].forEach((groupName) => {
+      document.getElementById(`${groupName}-product`).addEventListener("change", () => renderResults(groupName));
+      document.getElementById(`${groupName}-dose`).addEventListener("input", () => renderResults(groupName));
+      renderResults(groupName);
+    });
+  </script>
+</body>
+</html>

@@ -82,6 +82,7 @@
 }
 
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="calculator.html"],
+.md-sidebar--primary .md-nav--primary a.md-nav__link[href$="dose-converter.html"],
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="ctcae.html"] {
   background: rgba(3, 169, 244, 0.11);
   border: 1px solid rgba(3, 169, 244, 0.24);
@@ -92,6 +93,7 @@
 }
 
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="calculator.html"]:hover,
+.md-sidebar--primary .md-nav--primary a.md-nav__link[href$="dose-converter.html"]:hover,
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="ctcae.html"]:hover {
   background: rgba(3, 169, 244, 0.18);
   color: #0277bd;
@@ -102,6 +104,7 @@
 }
 
 [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="calculator.html"],
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="dose-converter.html"],
 [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="ctcae.html"] {
   background: rgba(3, 169, 244, 0.14);
   border-color: rgba(3, 169, 244, 0.32);
