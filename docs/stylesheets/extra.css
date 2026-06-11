@@ -75,39 +75,79 @@
 
 /* High-frequency tools should be immediately visible in the left nav */
 .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav__link {
-  background: linear-gradient(90deg, rgba(255, 193, 7, 0.22), rgba(0, 150, 136, 0.08));
-  border-left: 4px solid #f9a825;
+  background: rgba(0, 150, 136, 0.12);
+  border: 1px solid rgba(0, 150, 136, 0.24);
+  border-left: 4px solid var(--md-primary-fg-color);
+  border-radius: 0.4rem;
   color: var(--md-default-fg-color);
   font-weight: 800;
+  margin: 0.55rem 0.4rem 0;
+  padding: 0.42rem 0.6rem;
+}
+
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav {
+  margin: 0.18rem 0.4rem 0.65rem;
+}
+
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav > .md-nav__list {
+  background: rgba(0, 150, 136, 0.035);
+  border: 1px solid rgba(0, 150, 136, 0.16);
+  border-left: 1px solid rgba(0, 150, 136, 0.16);
+  border-radius: 0.4rem;
+  margin: 0;
+  padding: 0.25rem;
 }
 
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="calculator.html"],
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="dose-converter.html"],
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="ctcae.html"] {
-  background: rgba(3, 169, 244, 0.11);
-  border: 1px solid rgba(3, 169, 244, 0.24);
-  border-left: 4px solid #0288d1;
+  background: transparent;
+  border: 0;
+  border-radius: 0.3rem;
+  box-shadow: none;
   color: var(--md-default-fg-color);
   font-weight: 700;
-  margin-top: 0.18rem;
+  margin: 0.04rem 0;
+  padding: 0.36rem 0.45rem 0.36rem 1.35rem;
+  position: relative;
+}
+
+.md-sidebar--primary .md-nav--primary a.md-nav__link[href$="calculator.html"]::before,
+.md-sidebar--primary .md-nav--primary a.md-nav__link[href$="dose-converter.html"]::before,
+.md-sidebar--primary .md-nav--primary a.md-nav__link[href$="ctcae.html"]::before {
+  background: var(--md-primary-fg-color);
+  border-radius: 50%;
+  content: "";
+  height: 0.4rem;
+  left: 0.52rem;
+  position: absolute;
+  top: 0.82rem;
+  width: 0.4rem;
 }
 
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="calculator.html"]:hover,
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="dose-converter.html"]:hover,
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="ctcae.html"]:hover {
-  background: rgba(3, 169, 244, 0.18);
-  color: #0277bd;
+  background: rgba(0, 150, 136, 0.1);
+  color: var(--md-primary-fg-color);
+}
+
+.md-sidebar--primary .md-nav--primary a.md-nav__link.md-nav__link--active[href$="calculator.html"],
+.md-sidebar--primary .md-nav--primary a.md-nav__link.md-nav__link--active[href$="dose-converter.html"],
+.md-sidebar--primary .md-nav--primary a.md-nav__link.md-nav__link--active[href$="ctcae.html"] {
+  background: rgba(0, 150, 136, 0.14);
+  box-shadow: none;
+  color: var(--md-primary-fg-color);
 }
 
 [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav__link {
-  background: linear-gradient(90deg, rgba(255, 193, 7, 0.18), rgba(0, 188, 212, 0.08));
+  background: rgba(0, 188, 212, 0.12);
+  border-color: rgba(0, 188, 212, 0.28);
 }
 
-[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="calculator.html"],
-[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="dose-converter.html"],
-[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="ctcae.html"] {
-  background: rgba(3, 169, 244, 0.14);
-  border-color: rgba(3, 169, 244, 0.32);
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav > .md-nav__list {
+  background: rgba(0, 188, 212, 0.04);
+  border-color: rgba(0, 188, 212, 0.18);
 }
 
 .md-sidebar--primary .md-nav[data-md-level="1"] > .md-nav__list {
