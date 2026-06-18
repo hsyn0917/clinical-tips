@@ -1,5 +1,14 @@
 /* Mobile/iPad readability tweaks */
 
+:root {
+  --md-primary-fg-color: #00205b;
+  --md-primary-fg-color--light: #1a3d73;
+  --md-primary-fg-color--dark: #001a49;
+  --md-accent-fg-color: #00205b;
+  --md-accent-fg-color--transparent: rgba(0, 32, 91, 0.12);
+  --clinical-accent-rgb: 0, 32, 91;
+}
+
 /* Slightly larger body text and spacing */
 .md-typeset {
   font-size: 0.9rem;
@@ -66,7 +75,7 @@
 }
 
 .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link {
-  background: rgba(0, 150, 136, 0.08);
+  background: rgba(var(--clinical-accent-rgb), 0.08);
   border-left: 3px solid var(--md-primary-fg-color);
   color: var(--md-default-fg-color);
   font-weight: 700;
@@ -75,8 +84,8 @@
 
 /* High-frequency tools should be immediately visible in the left nav */
 .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav__link {
-  background: rgba(0, 150, 136, 0.12);
-  border: 1px solid rgba(0, 150, 136, 0.24);
+  background: rgba(var(--clinical-accent-rgb), 0.12);
+  border: 1px solid rgba(var(--clinical-accent-rgb), 0.24);
   border-left: 4px solid var(--md-primary-fg-color);
   border-radius: 0.4rem;
   color: var(--md-default-fg-color);
@@ -90,9 +99,9 @@
 }
 
 .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav > .md-nav__list {
-  background: rgba(0, 150, 136, 0.035);
-  border: 1px solid rgba(0, 150, 136, 0.16);
-  border-left: 1px solid rgba(0, 150, 136, 0.16);
+  background: rgba(var(--clinical-accent-rgb), 0.035);
+  border: 1px solid rgba(var(--clinical-accent-rgb), 0.16);
+  border-left: 1px solid rgba(var(--clinical-accent-rgb), 0.16);
   border-radius: 0.4rem;
   margin: 0;
   padding: 0.25rem;
@@ -131,7 +140,7 @@
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="dose-converter.html"]:hover,
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="elderly-prognosis.html"]:hover,
 .md-sidebar--primary .md-nav--primary a.md-nav__link[href$="ctcae.html"]:hover {
-  background: rgba(0, 150, 136, 0.1);
+  background: rgba(var(--clinical-accent-rgb), 0.1);
   color: var(--md-primary-fg-color);
 }
 
@@ -139,19 +148,19 @@
 .md-sidebar--primary .md-nav--primary a.md-nav__link.md-nav__link--active[href$="dose-converter.html"],
 .md-sidebar--primary .md-nav--primary a.md-nav__link.md-nav__link--active[href$="elderly-prognosis.html"],
 .md-sidebar--primary .md-nav--primary a.md-nav__link.md-nav__link--active[href$="ctcae.html"] {
-  background: rgba(0, 150, 136, 0.14);
+  background: rgba(var(--clinical-accent-rgb), 0.14);
   box-shadow: none;
   color: var(--md-primary-fg-color);
 }
 
 [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav__link {
-  background: rgba(0, 188, 212, 0.12);
-  border-color: rgba(0, 188, 212, 0.28);
+  background: rgba(var(--clinical-accent-rgb), 0.2);
+  border-color: rgba(var(--clinical-accent-rgb), 0.45);
 }
 
 [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav > .md-nav__list {
-  background: rgba(0, 188, 212, 0.04);
-  border-color: rgba(0, 188, 212, 0.18);
+  background: rgba(var(--clinical-accent-rgb), 0.16);
+  border-color: rgba(var(--clinical-accent-rgb), 0.32);
 }
 
 .md-sidebar--primary .md-nav[data-md-level="1"] > .md-nav__list {
@@ -177,7 +186,7 @@
 }
 
 .md-sidebar--primary .md-nav--primary .md-nav__link--active {
-  background: rgba(0, 150, 136, 0.12);
+  background: rgba(var(--clinical-accent-rgb), 0.12);
   box-shadow: inset 3px 0 0 var(--md-primary-fg-color);
   color: var(--md-primary-fg-color);
   font-weight: 700;

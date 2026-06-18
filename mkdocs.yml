@@ -6,14 +6,14 @@ theme:
   language: ja
   palette:
     - scheme: default
-      primary: teal
-      accent: cyan
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/weather-night
         name: ダークモードに切替
     - scheme: slate
-      primary: teal
-      accent: cyan
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/weather-sunny
         name: ライトモードに切替
