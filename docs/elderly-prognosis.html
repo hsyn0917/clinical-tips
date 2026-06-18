@@ -69,7 +69,7 @@
 
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 10px;
       margin-bottom: 14px;
     }
@@ -202,7 +202,7 @@
 
     .tabs {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       margin-bottom: 14px;
     }
@@ -348,8 +348,8 @@
 </head>
 <body>
   <main class="container">
-    <h1>G8 / Lee / Schonberg 高齢者生命予後予測</h1>
-    <p class="lead">高齢がん診療での脆弱性スクリーニングと、地域在住高齢者の死亡リスク推定を並べて確認するための計算ツール。</p>
+    <h1>G8 / Lee / Schonberg / CCI 高齢者生命予後予測</h1>
+    <p class="lead">高齢がん診療での脆弱性スクリーニング、地域在住高齢者の死亡リスク推定、併存疾患負荷を並べて確認するための計算ツール。</p>
 
     <section class="summary-grid" aria-label="計算結果サマリー">
       <div class="summary-card" id="summaryG8Card">
@@ -366,6 +366,11 @@
         <div class="summary-label">Schonberg Index</div>
         <div class="summary-value" id="summarySchonberg">未入力</div>
         <div class="summary-caption" id="summarySchonbergText">5年・9年死亡リスク</div>
+      </div>
+      <div class="summary-card" id="summaryCciCard">
+        <div class="summary-label">CCI</div>
+        <div class="summary-value" id="summaryCci">0 点</div>
+        <div class="summary-caption" id="summaryCciText">Charlson Comorbidity Index</div>
       </div>
       <div class="summary-card">
         <div class="summary-label">BMI</div>
@@ -407,6 +412,7 @@
     <nav class="tabs" aria-label="スコア選択">
       <button class="tab-button active" type="button" data-tab="g8">G8</button>
       <button class="tab-button" type="button" data-tab="prognosis">Lee / Schonberg 同時入力</button>
+      <button class="tab-button" type="button" data-tab="cci">CCI</button>
     </nav>
 
     <section class="panel active" id="panel-g8">
@@ -601,6 +607,99 @@
       </div>
     </section>
 
+    <section class="panel" id="panel-cci">
+      <div class="result-grid">
+        <div class="result-card">
+          <h3>CCIスコア</h3>
+          <div class="risk-number" id="cciScore">0 点</div>
+          <div class="risk-note">Charlson Comorbidity Index。併存疾患の点数のみ。</div>
+        </div>
+        <div class="result-card">
+          <h3>年齢調整CCI</h3>
+          <div class="risk-number" id="cciAgeScore">未入力</div>
+          <div class="risk-note" id="cciAgeNote">年齢 50歳台 +1、60歳台 +2、70歳台 +3、80歳以上 +4。</div>
+        </div>
+        <div class="result-card">
+          <h3>併存疾患負荷</h3>
+          <div class="risk-number" id="cciBurden">低</div>
+          <div class="risk-note">点数は治療適応を単独で決めるものではなく、PS・臓器機能・がんの状態と併せて確認。</div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2>Charlson Comorbidity Index項目</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="cciMi">心筋梗塞</label>
+            <select id="cciMi" data-cci="mi"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciChf">うっ血性心不全</label>
+            <select id="cciChf" data-cci="chf"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciPvd">末梢血管疾患</label>
+            <select id="cciPvd" data-cci="pvd"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciCvd">脳血管疾患</label>
+            <select id="cciCvd" data-cci="cvd"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciDementia">認知症</label>
+            <select id="cciDementia" data-cci="dementia"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciPulmonary">慢性肺疾患</label>
+            <select id="cciPulmonary" data-cci="pulmonary"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciRheumatic">膠原病・リウマチ性疾患</label>
+            <select id="cciRheumatic" data-cci="rheumatic"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciPepticUlcer">消化性潰瘍</label>
+            <select id="cciPepticUlcer" data-cci="ulcer"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciDiabetes">糖尿病</label>
+            <select id="cciDiabetes" data-cci="diabetes"><option value="0">なし（0点）</option><option value="1">合併症なし（1点）</option><option value="2">臓器障害あり（2点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciLiver">肝疾患</label>
+            <select id="cciLiver" data-cci="liver"><option value="0">なし（0点）</option><option value="1">軽症（1点）</option><option value="3">中等症・重症（3点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciHemiplegia">片麻痺・対麻痺</label>
+            <select id="cciHemiplegia" data-cci="hemiplegia"><option value="0">なし（0点）</option><option value="2">あり（2点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciRenal">中等度以上の腎疾患</label>
+            <select id="cciRenal" data-cci="renal"><option value="0">なし（0点）</option><option value="2">あり（2点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciTumor">固形腫瘍</label>
+            <select id="cciTumor" data-cci="tumor"><option value="0">なし（0点）</option><option value="2">限局性/転移なし（2点）</option><option value="6">転移性（6点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciLeukemia">白血病</label>
+            <select id="cciLeukemia" data-cci="leukemia"><option value="0">なし（0点）</option><option value="2">あり（2点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciLymphoma">リンパ腫</label>
+            <select id="cciLymphoma" data-cci="lymphoma"><option value="0">なし（0点）</option><option value="2">あり（2点）</option></select>
+          </div>
+          <div class="field">
+            <label for="cciAids">AIDS</label>
+            <select id="cciAids" data-cci="aids"><option value="0">なし（0点）</option><option value="6">あり（6点）</option></select>
+          </div>
+        </div>
+        <div class="notice">
+          糖尿病、肝疾患、固形腫瘍は重複加点せず、該当する最も重い選択肢を選んでください。ここでは臨床項目版のCCIを簡易入力として実装しており、ICDコードベースのCharlson/Deyoなどの派生版とは一致しない場合があります。
+        </div>
+      </div>
+    </section>
+
     <section class="panel-card">
       <h2>スコア内訳</h2>
       <table class="score-detail">
@@ -625,7 +724,8 @@
         Bellera CA et al. Ann Oncol. 2012;23:2166-2172 /
         Soubeyran P et al. PLoS One. 2014;9:e115060 /
         Lee SJ et al. JAMA. 2006;295:801-808 /
-        Schonberg MA et al. J Gen Intern Med. 2009;24:1115-1122; J Am Geriatr Soc. 2011;59:1444-1451.
+        Schonberg MA et al. J Gen Intern Med. 2009;24:1115-1122; J Am Geriatr Soc. 2011;59:1444-1451 /
+        <a href="https://doi.org/10.1016/0021-9681(87)90171-8" target="_blank" rel="noopener noreferrer">Charlson ME et al. J Chronic Dis. 1987;40:373-383</a>.
       </div>
     </section>
   </main>
@@ -748,6 +848,15 @@
       return 0;
     }
 
+    function agePointsCci(age) {
+      if (age === null) return null;
+      if (age < 50) return 0;
+      if (age < 60) return 1;
+      if (age < 70) return 2;
+      if (age < 80) return 3;
+      return 4;
+    }
+
     function bmiG8Points(currentBmi) {
       const manual = selectNumber("g8BmiManual");
       if (manual !== null) return manual;
@@ -783,6 +892,18 @@
       if (score <= 7) return "good";
       if (score <= 13) return "caution";
       return "high";
+    }
+
+    function cciLevel(score) {
+      if (score <= 2) return "good";
+      if (score <= 4) return "caution";
+      return "high";
+    }
+
+    function cciBurdenLabel(score) {
+      if (score <= 2) return "低";
+      if (score <= 4) return "中";
+      return "高";
     }
 
     function formatScore(score, max) {
@@ -858,13 +979,57 @@
       };
     }
 
-    function renderBreakdown(g8, lee, schonberg) {
+    function calculateCci(currentAge) {
+      const parts = [];
+      const add = (label, id) => {
+        parts.push({ label, value: selectNumber(id) || 0 });
+      };
+      add("心筋梗塞", "cciMi");
+      add("うっ血性心不全", "cciChf");
+      add("末梢血管疾患", "cciPvd");
+      add("脳血管疾患", "cciCvd");
+      add("認知症", "cciDementia");
+      add("慢性肺疾患", "cciPulmonary");
+      add("膠原病・リウマチ性疾患", "cciRheumatic");
+      add("消化性潰瘍", "cciPepticUlcer");
+      add("糖尿病", "cciDiabetes");
+      add("肝疾患", "cciLiver");
+      add("片麻痺・対麻痺", "cciHemiplegia");
+      add("中等度以上の腎疾患", "cciRenal");
+      add("固形腫瘍", "cciTumor");
+      add("白血病", "cciLeukemia");
+      add("リンパ腫", "cciLymphoma");
+      add("AIDS", "cciAids");
+
+      const score = parts.reduce((sum, part) => sum + part.value, 0);
+      const agePoints = agePointsCci(currentAge);
+      return {
+        score,
+        agePoints,
+        ageAdjustedScore: agePoints === null ? null : score + agePoints,
+        parts
+      };
+    }
+
+    function renderBreakdown(g8, lee, schonberg, cci) {
       const active = document.querySelector(".tab-button.active").dataset.tab;
       const tbody = $("scoreBreakdown");
-      const datasets = active === "g8" ? [{ label: "G8", data: g8 }] : [
-        { label: "Lee", data: lee },
-        { label: "Schonberg", data: schonberg }
-      ];
+      let datasets;
+      if (active === "g8") {
+        datasets = [{ label: "G8", data: g8 }];
+      } else if (active === "cci") {
+        datasets = [{ label: "CCI", data: {
+          parts: [
+            ...cci.parts,
+            { label: "年齢加点", value: cci.agePoints }
+          ]
+        } }];
+      } else {
+        datasets = [
+          { label: "Lee", data: lee },
+          { label: "Schonberg", data: schonberg }
+        ];
+      }
       const rows = datasets.flatMap(({ label, data }) => data.parts.map((part) => {
         const value = part.value === null ? "未入力" : part.value;
         return `<tr><td>${label}: ${part.label}</td><td>${value}</td><td>${part.value === null ? "入力待ち" : "加点済み"}</td></tr>`;
@@ -934,7 +1099,22 @@
         setCardClass($("summarySchonbergCard"), scoreLevel(schonberg.score));
       }
 
-      renderBreakdown(g8, lee, schonberg);
+      const cci = calculateCci(currentAge);
+      $("cciScore").textContent = `${cci.score} 点`;
+      $("summaryCci").textContent = `${cci.score} 点`;
+      $("cciBurden").textContent = cciBurdenLabel(cci.score);
+      if (cci.ageAdjustedScore === null) {
+        $("cciAgeScore").textContent = "未入力";
+        $("cciAgeNote").textContent = "年齢を入力すると年齢調整CCIを表示します。";
+        $("summaryCciText").textContent = "年齢未入力";
+      } else {
+        $("cciAgeScore").textContent = `${cci.ageAdjustedScore} 点`;
+        $("cciAgeNote").textContent = `併存疾患 ${cci.score} 点 + 年齢 ${cci.agePoints} 点。`;
+        $("summaryCciText").textContent = `年齢調整 ${cci.ageAdjustedScore} 点`;
+      }
+      setCardClass($("summaryCciCard"), cciLevel(cci.score));
+
+      renderBreakdown(g8, lee, schonberg, cci);
     }
 
     document.querySelectorAll("input, select").forEach((element) => {
