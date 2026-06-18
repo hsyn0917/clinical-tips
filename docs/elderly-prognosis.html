@@ -157,8 +157,14 @@
     }
 
     .panel-card .field label,
-    .panel-card .field legend {
+    .panel-card .field legend,
+    .panel-card .field-label {
       color: #42526a;
+    }
+
+    .field-label {
+      font-size: 12px;
+      font-weight: 700;
     }
 
     select,
@@ -247,6 +253,124 @@
 
     .form-grid.two {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cci-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .cci-toolbar h2 {
+      margin-bottom: 0;
+    }
+
+    .reset-button {
+      min-height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 12px;
+      background: #fff;
+      color: var(--navy);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .reset-button:hover {
+      border-color: var(--blue);
+      background: var(--soft-blue);
+    }
+
+    .cci-section {
+      margin-top: 16px;
+    }
+
+    .cci-section:first-of-type {
+      margin-top: 0;
+    }
+
+    .cci-section h3 {
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cci-field {
+      gap: 7px;
+    }
+
+    .choice-group {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .choice-group.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .choice-button {
+      min-height: 40px;
+      border: 1px solid #b7c4d4;
+      border-radius: 6px;
+      padding: 7px 8px;
+      background: #fff;
+      color: #344054;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .choice-button:hover {
+      border-color: var(--blue);
+      background: var(--soft-blue);
+    }
+
+    .choice-button.selected {
+      border-color: var(--blue);
+      background: var(--soft-blue);
+      color: var(--navy);
+      box-shadow: inset 0 -3px 0 var(--blue);
+    }
+
+    .choice-button.positive.selected {
+      border-color: var(--yellow);
+      background: var(--soft-yellow);
+      box-shadow: inset 0 -3px 0 var(--yellow);
+    }
+
+    .choice-button.high.selected {
+      border-color: var(--red);
+      background: var(--soft-red);
+      box-shadow: inset 0 -3px 0 var(--red);
+    }
+
+    .selected-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 32px;
+      margin-top: 8px;
+    }
+
+    .selected-chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: #f8fafc;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .selected-empty {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
     }
 
     .result-grid {
@@ -340,6 +464,8 @@
       .input-grid,
       .form-grid,
       .form-grid.two,
+      .choice-group,
+      .choice-group.three,
       .tabs {
         grid-template-columns: 1fr;
       }
@@ -627,71 +753,164 @@
       </div>
 
       <div class="panel-card">
-        <h2>Charlson Comorbidity Index項目</h2>
-        <div class="form-grid">
-          <div class="field">
-            <label for="cciMi">心筋梗塞</label>
-            <select id="cciMi" data-cci="mi"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+        <div class="cci-toolbar">
+          <h2>Charlson Comorbidity Index項目</h2>
+          <button class="reset-button" type="button" id="resetCci">全てなし</button>
+        </div>
+
+        <div class="cci-section">
+          <h3>+1点項目</h3>
+          <div class="form-grid">
+            <div class="field cci-field">
+              <div class="field-label" id="cciMiLabel">心筋梗塞</div>
+              <input type="hidden" id="cciMi" data-cci="mi" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciMiLabel">
+                <button class="choice-button" type="button" data-target="cciMi" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciMi" data-value="1">あり +1</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciChfLabel">うっ血性心不全</div>
+              <input type="hidden" id="cciChf" data-cci="chf" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciChfLabel">
+                <button class="choice-button" type="button" data-target="cciChf" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciChf" data-value="1">あり +1</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciPvdLabel">末梢血管疾患</div>
+              <input type="hidden" id="cciPvd" data-cci="pvd" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciPvdLabel">
+                <button class="choice-button" type="button" data-target="cciPvd" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciPvd" data-value="1">あり +1</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciCvdLabel">脳血管疾患</div>
+              <input type="hidden" id="cciCvd" data-cci="cvd" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciCvdLabel">
+                <button class="choice-button" type="button" data-target="cciCvd" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciCvd" data-value="1">あり +1</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciDementiaLabel">認知症</div>
+              <input type="hidden" id="cciDementia" data-cci="dementia" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciDementiaLabel">
+                <button class="choice-button" type="button" data-target="cciDementia" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciDementia" data-value="1">あり +1</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciPulmonaryLabel">慢性肺疾患</div>
+              <input type="hidden" id="cciPulmonary" data-cci="pulmonary" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciPulmonaryLabel">
+                <button class="choice-button" type="button" data-target="cciPulmonary" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciPulmonary" data-value="1">あり +1</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciRheumaticLabel">膠原病・リウマチ性疾患</div>
+              <input type="hidden" id="cciRheumatic" data-cci="rheumatic" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciRheumaticLabel">
+                <button class="choice-button" type="button" data-target="cciRheumatic" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciRheumatic" data-value="1">あり +1</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciPepticUlcerLabel">消化性潰瘍</div>
+              <input type="hidden" id="cciPepticUlcer" data-cci="ulcer" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciPepticUlcerLabel">
+                <button class="choice-button" type="button" data-target="cciPepticUlcer" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciPepticUlcer" data-value="1">あり +1</button>
+              </div>
+            </div>
           </div>
-          <div class="field">
-            <label for="cciChf">うっ血性心不全</label>
-            <select id="cciChf" data-cci="chf"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+        </div>
+
+        <div class="cci-section">
+          <h3>重症度を選ぶ項目</h3>
+          <div class="form-grid">
+            <div class="field cci-field">
+              <div class="field-label" id="cciDiabetesLabel">糖尿病</div>
+              <input type="hidden" id="cciDiabetes" data-cci="diabetes" value="0">
+              <div class="choice-group three" role="radiogroup" aria-labelledby="cciDiabetesLabel">
+                <button class="choice-button" type="button" data-target="cciDiabetes" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciDiabetes" data-value="1">合併症なし +1</button>
+                <button class="choice-button positive" type="button" data-target="cciDiabetes" data-value="2">臓器障害あり +2</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciLiverLabel">肝疾患</div>
+              <input type="hidden" id="cciLiver" data-cci="liver" value="0">
+              <div class="choice-group three" role="radiogroup" aria-labelledby="cciLiverLabel">
+                <button class="choice-button" type="button" data-target="cciLiver" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciLiver" data-value="1">軽症 +1</button>
+                <button class="choice-button high" type="button" data-target="cciLiver" data-value="3">中等症・重症 +3</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciTumorLabel">固形腫瘍</div>
+              <input type="hidden" id="cciTumor" data-cci="tumor" value="0">
+              <div class="choice-group three" role="radiogroup" aria-labelledby="cciTumorLabel">
+                <button class="choice-button" type="button" data-target="cciTumor" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciTumor" data-value="2">転移なし +2</button>
+                <button class="choice-button high" type="button" data-target="cciTumor" data-value="6">転移性 +6</button>
+              </div>
+            </div>
           </div>
-          <div class="field">
-            <label for="cciPvd">末梢血管疾患</label>
-            <select id="cciPvd" data-cci="pvd"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
+        </div>
+
+        <div class="cci-section">
+          <h3>+2点以上の有無項目</h3>
+          <div class="form-grid">
+            <div class="field cci-field">
+              <div class="field-label" id="cciHemiplegiaLabel">片麻痺・対麻痺</div>
+              <input type="hidden" id="cciHemiplegia" data-cci="hemiplegia" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciHemiplegiaLabel">
+                <button class="choice-button" type="button" data-target="cciHemiplegia" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciHemiplegia" data-value="2">あり +2</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciRenalLabel">中等度以上の腎疾患</div>
+              <input type="hidden" id="cciRenal" data-cci="renal" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciRenalLabel">
+                <button class="choice-button" type="button" data-target="cciRenal" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciRenal" data-value="2">あり +2</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciLeukemiaLabel">白血病</div>
+              <input type="hidden" id="cciLeukemia" data-cci="leukemia" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciLeukemiaLabel">
+                <button class="choice-button" type="button" data-target="cciLeukemia" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciLeukemia" data-value="2">あり +2</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciLymphomaLabel">リンパ腫</div>
+              <input type="hidden" id="cciLymphoma" data-cci="lymphoma" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciLymphomaLabel">
+                <button class="choice-button" type="button" data-target="cciLymphoma" data-value="0">なし</button>
+                <button class="choice-button positive" type="button" data-target="cciLymphoma" data-value="2">あり +2</button>
+              </div>
+            </div>
+            <div class="field cci-field">
+              <div class="field-label" id="cciAidsLabel">AIDS</div>
+              <input type="hidden" id="cciAids" data-cci="aids" value="0">
+              <div class="choice-group" role="radiogroup" aria-labelledby="cciAidsLabel">
+                <button class="choice-button" type="button" data-target="cciAids" data-value="0">なし</button>
+                <button class="choice-button high" type="button" data-target="cciAids" data-value="6">あり +6</button>
+              </div>
+            </div>
           </div>
-          <div class="field">
-            <label for="cciCvd">脳血管疾患</label>
-            <select id="cciCvd" data-cci="cvd"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciDementia">認知症</label>
-            <select id="cciDementia" data-cci="dementia"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciPulmonary">慢性肺疾患</label>
-            <select id="cciPulmonary" data-cci="pulmonary"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciRheumatic">膠原病・リウマチ性疾患</label>
-            <select id="cciRheumatic" data-cci="rheumatic"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciPepticUlcer">消化性潰瘍</label>
-            <select id="cciPepticUlcer" data-cci="ulcer"><option value="0">なし（0点）</option><option value="1">あり（1点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciDiabetes">糖尿病</label>
-            <select id="cciDiabetes" data-cci="diabetes"><option value="0">なし（0点）</option><option value="1">合併症なし（1点）</option><option value="2">臓器障害あり（2点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciLiver">肝疾患</label>
-            <select id="cciLiver" data-cci="liver"><option value="0">なし（0点）</option><option value="1">軽症（1点）</option><option value="3">中等症・重症（3点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciHemiplegia">片麻痺・対麻痺</label>
-            <select id="cciHemiplegia" data-cci="hemiplegia"><option value="0">なし（0点）</option><option value="2">あり（2点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciRenal">中等度以上の腎疾患</label>
-            <select id="cciRenal" data-cci="renal"><option value="0">なし（0点）</option><option value="2">あり（2点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciTumor">固形腫瘍</label>
-            <select id="cciTumor" data-cci="tumor"><option value="0">なし（0点）</option><option value="2">限局性/転移なし（2点）</option><option value="6">転移性（6点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciLeukemia">白血病</label>
-            <select id="cciLeukemia" data-cci="leukemia"><option value="0">なし（0点）</option><option value="2">あり（2点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciLymphoma">リンパ腫</label>
-            <select id="cciLymphoma" data-cci="lymphoma"><option value="0">なし（0点）</option><option value="2">あり（2点）</option></select>
-          </div>
-          <div class="field">
-            <label for="cciAids">AIDS</label>
-            <select id="cciAids" data-cci="aids"><option value="0">なし（0点）</option><option value="6">あり（6点）</option></select>
+        </div>
+
+        <div class="cci-section">
+          <h3>加点中</h3>
+          <div class="selected-list" id="cciSelectedList">
+            <span class="selected-empty">加点項目はありません。</span>
           </div>
         </div>
         <div class="notice">
@@ -1011,6 +1230,26 @@
       };
     }
 
+    function updateCciControls() {
+      document.querySelectorAll(".choice-button").forEach((button) => {
+        const target = $(button.dataset.target);
+        const selected = target && target.value === button.dataset.value;
+        button.classList.toggle("selected", Boolean(selected));
+        button.setAttribute("aria-pressed", selected ? "true" : "false");
+      });
+    }
+
+    function renderCciSelected(cci) {
+      const selected = cci.parts.filter((part) => part.value > 0);
+      if (selected.length === 0) {
+        $("cciSelectedList").innerHTML = '<span class="selected-empty">加点項目はありません。</span>';
+        return;
+      }
+      $("cciSelectedList").innerHTML = selected
+        .map((part) => `<span class="selected-chip">${part.label} +${part.value}</span>`)
+        .join("");
+    }
+
     function renderBreakdown(g8, lee, schonberg, cci) {
       const active = document.querySelector(".tab-button.active").dataset.tab;
       const tbody = $("scoreBreakdown");
@@ -1103,6 +1342,7 @@
       $("cciScore").textContent = `${cci.score} 点`;
       $("summaryCci").textContent = `${cci.score} 点`;
       $("cciBurden").textContent = cciBurdenLabel(cci.score);
+      renderCciSelected(cci);
       if (cci.ageAdjustedScore === null) {
         $("cciAgeScore").textContent = "未入力";
         $("cciAgeNote").textContent = "年齢を入力すると年齢調整CCIを表示します。";
@@ -1116,6 +1356,22 @@
 
       renderBreakdown(g8, lee, schonberg, cci);
     }
+
+    document.querySelectorAll(".choice-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        $(button.dataset.target).value = button.dataset.value;
+        updateCciControls();
+        update();
+      });
+    });
+
+    $("resetCci").addEventListener("click", () => {
+      document.querySelectorAll("[data-cci]").forEach((input) => {
+        input.value = "0";
+      });
+      updateCciControls();
+      update();
+    });
 
     document.querySelectorAll("input, select").forEach((element) => {
       element.addEventListener("input", update);
@@ -1132,6 +1388,7 @@
       });
     });
 
+    updateCciControls();
     update();
   </script>
 </body>
