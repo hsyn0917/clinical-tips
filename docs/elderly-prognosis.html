@@ -202,7 +202,7 @@
 
     .tabs {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin-bottom: 14px;
     }
@@ -406,8 +406,7 @@
 
     <nav class="tabs" aria-label="スコア選択">
       <button class="tab-button active" type="button" data-tab="g8">G8</button>
-      <button class="tab-button" type="button" data-tab="lee">Lee Index</button>
-      <button class="tab-button" type="button" data-tab="schonberg">Schonberg Index</button>
+      <button class="tab-button" type="button" data-tab="prognosis">Lee / Schonberg 同時入力</button>
     </nav>
 
     <section class="panel active" id="panel-g8">
@@ -501,192 +500,102 @@
       </div>
     </section>
 
-    <section class="panel" id="panel-lee">
+    <section class="panel" id="panel-prognosis">
       <div class="result-grid">
         <div class="result-card">
-          <h3>Leeスコア</h3>
+          <h3>Lee Index</h3>
           <div class="risk-number" id="leeScore">未入力</div>
-          <div class="risk-note">地域在住50歳以上が対象。</div>
+          <div class="risk-note"><span id="leeRisk4">--</span>（4年） / <span id="leeRisk10">--</span>（10年）</div>
         </div>
         <div class="result-card">
-          <h3>4年死亡リスク</h3>
-          <div class="risk-number" id="leeRisk4">--</div>
-          <div class="risk-note" id="leeRisk4Note">ePrognosis掲載カテゴリ。</div>
-        </div>
-        <div class="result-card">
-          <h3>10年死亡リスク</h3>
-          <div class="risk-number" id="leeRisk10">--</div>
-          <div class="risk-note" id="leeRisk10Note">ePrognosis掲載カテゴリ。</div>
-        </div>
-      </div>
-
-      <div class="panel-card">
-        <h2>Lee Index項目</h2>
-        <div class="form-grid">
-          <div class="field">
-            <label for="leeDiabetes">糖尿病</label>
-            <select id="leeDiabetes" data-lee="diabetes">
-              <option value="">未選択</option>
-              <option value="1">あり（1点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="leeCancer">がん既往（軽微な皮膚がん除く）</label>
-            <select id="leeCancer" data-lee="cancer">
-              <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="leeCopd">COPDで日常生活制限</label>
-            <select id="leeCopd" data-lee="copd">
-              <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="leeChf">心不全</label>
-            <select id="leeChf" data-lee="chf">
-              <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="leeSmoke">現喫煙</label>
-            <select id="leeSmoke" data-lee="smoke">
-              <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="leeBathing">入浴に介助が必要</label>
-            <select id="leeBathing" data-lee="bathing">
-              <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="leeFinance">金銭管理が困難</label>
-            <select id="leeFinance" data-lee="finance">
-              <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="leeWalk">数ブロック歩行が困難</label>
-            <select id="leeWalk" data-lee="walk">
-              <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="leePush">大きな物を押す/引くのが困難</label>
-            <select id="leePush" data-lee="push">
-              <option value="">未選択</option>
-              <option value="1">あり（1点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel" id="panel-schonberg">
-      <div class="result-grid">
-        <div class="result-card">
-          <h3>Schonbergスコア</h3>
+          <h3>Schonberg Index</h3>
           <div class="risk-number" id="schonbergScore">未入力</div>
-          <div class="risk-note">地域在住65歳以上が対象。</div>
+          <div class="risk-note"><span id="schonbergRisk5">--</span>（5年） / <span id="schonbergRisk9">--</span>（9年）</div>
         </div>
         <div class="result-card">
-          <h3>5年死亡リスク</h3>
-          <div class="risk-number" id="schonbergRisk5">--</div>
-          <div class="risk-note" id="schonbergRisk5Note">2001-2004年NHIS新規検証コホート。</div>
-        </div>
-        <div class="result-card">
-          <h3>9年死亡リスク</h3>
-          <div class="risk-number" id="schonbergRisk9">--</div>
-          <div class="risk-note" id="schonbergRisk9Note">1997-2000年NHIS延長追跡の検証コホート。</div>
+          <h3>入力方式</h3>
+          <div class="risk-number">一括</div>
+          <div class="risk-note">ePrognosisの質問に近い共通入力で、LeeとSchonbergを同時に更新します。</div>
         </div>
       </div>
 
       <div class="panel-card">
-        <h2>Schonberg Index項目</h2>
+        <h2>Lee / Schonberg 共通項目</h2>
         <div class="form-grid">
           <div class="field">
-            <label for="schSmoke">喫煙歴</label>
-            <select id="schSmoke" data-schonberg="smoke">
+            <label for="smokeStatus">喫煙歴</label>
+            <select id="smokeStatus">
               <option value="">未選択</option>
-              <option value="0">なし（0点）</option>
-              <option value="1">過去喫煙（1点）</option>
-              <option value="3">現喫煙（3点）</option>
+              <option value="never">なし</option>
+              <option value="former">過去喫煙</option>
+              <option value="current">現喫煙</option>
             </select>
           </div>
           <div class="field">
-            <label for="schCancer">がん既往（黒色腫含む、非黒色腫皮膚がん除く）</label>
-            <select id="schCancer" data-schonberg="cancer">
+            <label for="cancerHistory">がん既往（非黒色腫皮膚がん除く）</label>
+            <select id="cancerHistory">
               <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
+              <option value="yes">あり</option>
+              <option value="no">なし</option>
             </select>
           </div>
           <div class="field">
-            <label for="schDiabetes">糖尿病</label>
-            <select id="schDiabetes" data-schonberg="diabetes">
+            <label for="diabetesHistory">糖尿病</label>
+            <select id="diabetesHistory">
               <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
+              <option value="yes">あり</option>
+              <option value="no">なし</option>
             </select>
           </div>
           <div class="field">
-            <label for="schCopd">COPD</label>
-            <select id="schCopd" data-schonberg="copd">
+            <label for="copdHistory">COPD / 慢性肺疾患</label>
+            <select id="copdHistory">
               <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
+              <option value="yes">あり</option>
+              <option value="no">なし</option>
             </select>
           </div>
           <div class="field">
-            <label for="schHosp">過去1年の入院回数</label>
-            <select id="schHosp" data-schonberg="hospital">
+            <label for="walkingDifficulty">歩行困難</label>
+            <select id="walkingDifficulty">
               <option value="">未選択</option>
-              <option value="0">0回（0点）</option>
-              <option value="1">1回（1点）</option>
-              <option value="3">2回以上（3点）</option>
+              <option value="yes">あり</option>
+              <option value="no">なし</option>
             </select>
           </div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2>追加項目</h2>
+        <div class="form-grid">
           <div class="field">
-            <label for="schHealth">自己評価健康状態</label>
-            <select id="schHealth" data-schonberg="health">
-              <option value="">未選択</option>
-              <option value="0">Excellent/Very good（0点）</option>
-              <option value="1">Good（1点）</option>
-              <option value="2">Fair/Poor（2点）</option>
-            </select>
+            <label for="leeChf">心不全（Lee）</label>
+            <select id="leeChf" data-lee="chf"><option value="">未選択</option><option value="2">あり（2点）</option><option value="0">なし（0点）</option></select>
           </div>
           <div class="field">
-            <label for="schIadl">日常用事・買い物・移動などに介助が必要</label>
-            <select id="schIadl" data-schonberg="iadl">
-              <option value="">未選択</option>
-              <option value="2">あり（2点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
+            <label for="leeBathing">入浴に介助が必要（Lee）</label>
+            <select id="leeBathing" data-lee="bathing"><option value="">未選択</option><option value="2">あり（2点）</option><option value="0">なし（0点）</option></select>
           </div>
           <div class="field">
-            <label for="schWalk">1/4マイル程度の歩行困難</label>
-            <select id="schWalk" data-schonberg="walk">
-              <option value="">未選択</option>
-              <option value="3">あり（3点）</option>
-              <option value="0">なし（0点）</option>
-            </select>
+            <label for="leeFinance">金銭管理が困難（Lee）</label>
+            <select id="leeFinance" data-lee="finance"><option value="">未選択</option><option value="2">あり（2点）</option><option value="0">なし（0点）</option></select>
+          </div>
+          <div class="field">
+            <label for="leePush">大きな物を押す/引くのが困難（Lee）</label>
+            <select id="leePush" data-lee="push"><option value="">未選択</option><option value="1">あり（1点）</option><option value="0">なし（0点）</option></select>
+          </div>
+          <div class="field">
+            <label for="schHosp">過去1年の入院回数（Schonberg）</label>
+            <select id="schHosp" data-schonberg="hospital"><option value="">未選択</option><option value="0">0回（0点）</option><option value="1">1回（1点）</option><option value="3">2回以上（3点）</option></select>
+          </div>
+          <div class="field">
+            <label for="schHealth">自己評価健康状態（Schonberg）</label>
+            <select id="schHealth" data-schonberg="health"><option value="">未選択</option><option value="0">Excellent/Very good（0点）</option><option value="1">Good（1点）</option><option value="2">Fair/Poor（2点）</option></select>
+          </div>
+          <div class="field">
+            <label for="schIadl">日常用事・買い物・移動などに介助が必要（Schonberg）</label>
+            <select id="schIadl" data-schonberg="iadl"><option value="">未選択</option><option value="2">あり（2点）</option><option value="0">なし（0点）</option></select>
           </div>
         </div>
       </div>
@@ -777,10 +686,32 @@
     }
 
     function selectNumber(id) {
-      const value = $(id).value;
+      const element = $(id);
+      if (!element) return null;
+      const value = element.value;
       if (value === "") return null;
       const parsed = parseFloat(value);
       return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    function yesNoPoints(id, yesPoints, noPoints = 0) {
+      const value = $(id).value;
+      if (value === "") return null;
+      return value === "yes" ? yesPoints : noPoints;
+    }
+
+    function smokingPointsLee() {
+      const value = $("smokeStatus").value;
+      if (value === "") return null;
+      return value === "current" ? 2 : 0;
+    }
+
+    function smokingPointsSchonberg() {
+      const value = $("smokeStatus").value;
+      if (value === "") return null;
+      if (value === "current") return 3;
+      if (value === "former") return 1;
+      return 0;
     }
 
     function bmi() {
@@ -887,14 +818,14 @@
       add("年齢", agePointsLee(currentAge));
       add("男性", sex === "" ? null : (sex === "male" ? 2 : 0));
       add("BMI <25", currentBmi === null ? null : (currentBmi < 25 ? 1 : 0));
-      add("糖尿病", selectNumber("leeDiabetes"));
-      add("がん既往", selectNumber("leeCancer"));
-      add("COPDで日常生活制限", selectNumber("leeCopd"));
+      add("糖尿病", yesNoPoints("diabetesHistory", 1));
+      add("がん既往", yesNoPoints("cancerHistory", 2));
+      add("COPDで日常生活制限", yesNoPoints("copdHistory", 2));
       add("心不全", selectNumber("leeChf"));
-      add("現喫煙", selectNumber("leeSmoke"));
+      add("現喫煙", smokingPointsLee());
       add("入浴介助", selectNumber("leeBathing"));
       add("金銭管理困難", selectNumber("leeFinance"));
-      add("歩行困難", selectNumber("leeWalk"));
+      add("歩行困難", yesNoPoints("walkingDifficulty", 2));
       add("大きな物の押し引き困難", selectNumber("leePush"));
 
       if (parts.some((part) => part.value === null)) return { score: null, parts };
@@ -910,15 +841,15 @@
       const add = (label, value) => parts.push({ label, value });
       add("年齢", agePointsSchonberg(currentAge));
       add("男性", sex === "" ? null : (sex === "male" ? 3 : 0));
-      add("喫煙歴", selectNumber("schSmoke"));
+      add("喫煙歴", smokingPointsSchonberg());
       add("BMI <25", currentBmi === null ? null : (currentBmi < 25 ? 2 : 0));
-      add("がん既往", selectNumber("schCancer"));
-      add("糖尿病", selectNumber("schDiabetes"));
-      add("COPD", selectNumber("schCopd"));
+      add("がん既往", yesNoPoints("cancerHistory", 2));
+      add("糖尿病", yesNoPoints("diabetesHistory", 2));
+      add("COPD", yesNoPoints("copdHistory", 2));
       add("過去1年の入院", selectNumber("schHosp"));
       add("自己評価健康状態", selectNumber("schHealth"));
       add("IADL介助", selectNumber("schIadl"));
-      add("歩行困難", selectNumber("schWalk"));
+      add("歩行困難", yesNoPoints("walkingDifficulty", 3));
 
       if (parts.some((part) => part.value === null)) return { score: null, parts };
       return {
@@ -929,13 +860,15 @@
 
     function renderBreakdown(g8, lee, schonberg) {
       const active = document.querySelector(".tab-button.active").dataset.tab;
-      const data = active === "g8" ? g8 : active === "lee" ? lee : schonberg;
-      const label = active === "g8" ? "G8" : active === "lee" ? "Lee" : "Schonberg";
       const tbody = $("scoreBreakdown");
-      const rows = data.parts.map((part) => {
+      const datasets = active === "g8" ? [{ label: "G8", data: g8 }] : [
+        { label: "Lee", data: lee },
+        { label: "Schonberg", data: schonberg }
+      ];
+      const rows = datasets.flatMap(({ label, data }) => data.parts.map((part) => {
         const value = part.value === null ? "未入力" : part.value;
         return `<tr><td>${label}: ${part.label}</td><td>${value}</td><td>${part.value === null ? "入力待ち" : "加点済み"}</td></tr>`;
-      });
+      }));
       tbody.innerHTML = rows.join("");
     }
 
