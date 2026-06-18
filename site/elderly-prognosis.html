@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高齢者生命予後予測</title>
+  <style>
+    :root {
+      --navy: #173b68;
+      --blue: #1f6fb2;
+      --cyan: #0d9488;
+      --green: #087f5b;
+      --yellow: #b7791f;
+      --red: #b42318;
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --muted: #667085;
+      --border: #d8e0ea;
+      --soft-blue: #e8f2ff;
+      --soft-green: #e8f7f0;
+      --soft-yellow: #fff7df;
+      --soft-red: #fff0ed;
+      --text: #223044;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Hiragino Kaku Gothic Pro", "Yu Gothic", Meiryo, sans-serif;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--navy);
+      color: var(--navy);
+      font-size: 21px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    .lead {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .summary-card,
+    .panel-card,
+    .result-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+    }
+
+    .summary-card {
+      min-height: 104px;
+      padding: 12px 14px;
+      border-left: 5px solid #8aa4c5;
+    }
+
+    .summary-card.good {
+      border-left-color: var(--green);
+      background: var(--soft-green);
+    }
+
+    .summary-card.caution {
+      border-left-color: var(--yellow);
+      background: var(--soft-yellow);
+    }
+
+    .summary-card.high {
+      border-left-color: var(--red);
+      background: var(--soft-red);
+    }
+
+    .summary-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .summary-value {
+      margin-top: 6px;
+      color: var(--navy);
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .summary-caption {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .common-card {
+      margin-bottom: 14px;
+      padding: 16px;
+      background: var(--navy);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(20, 45, 80, 0.18);
+    }
+
+    .common-card h2 {
+      color: #fff;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label,
+    .field legend {
+      color: #cfe1f6;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .panel-card .field label,
+    .panel-card .field legend {
+      color: #42526a;
+    }
+
+    select,
+    input[type="number"] {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #9aabc2;
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fff;
+      color: #172033;
+      font-size: 15px;
+    }
+
+    select:focus,
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #8ac7ff;
+      box-shadow: 0 0 0 3px rgba(138, 199, 255, 0.26);
+    }
+
+    .bmi-box {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .bmi-box span {
+      color: #cfe1f6;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tab-button {
+      min-height: 44px;
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .tab-button.active {
+      border-color: var(--blue);
+      background: var(--soft-blue);
+      color: var(--navy);
+      box-shadow: inset 0 -3px 0 var(--blue);
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .panel-card {
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .form-grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .result-card {
+      padding: 13px 14px;
+      border-left: 5px solid var(--cyan);
+    }
+
+    .risk-number {
+      color: var(--navy);
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .risk-note {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .score-detail {
+      margin-top: 12px;
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      font-size: 12px;
+    }
+
+    .score-detail th,
+    .score-detail td {
+      border: 1px solid var(--border);
+      padding: 7px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .score-detail th {
+      background: #edf3f9;
+      color: var(--navy);
+    }
+
+    .notice {
+      border: 1px solid #f0d58a;
+      border-radius: 8px;
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: #fff9e8;
+      color: #6b4d0b;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .refs {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .refs a {
+      color: var(--blue);
+    }
+
+    @media (max-width: 900px) {
+      .summary-grid,
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .input-grid,
+      .form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        padding: 12px;
+      }
+
+      .summary-grid,
+      .result-grid,
+      .input-grid,
+      .form-grid,
+      .form-grid.two,
+      .tabs {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>G8 / Lee / Schonberg 高齢者生命予後予測</h1>
+    <p class="lead">高齢がん診療での脆弱性スクリーニングと、地域在住高齢者の死亡リスク推定を並べて確認するための計算ツール。</p>
+
+    <section class="summary-grid" aria-label="計算結果サマリー">
+      <div class="summary-card" id="summaryG8Card">
+        <div class="summary-label">G8</div>
+        <div class="summary-value" id="summaryG8">未入力</div>
+        <div class="summary-caption" id="summaryG8Text">8項目の合計を表示</div>
+      </div>
+      <div class="summary-card" id="summaryLeeCard">
+        <div class="summary-label">Lee Index</div>
+        <div class="summary-value" id="summaryLee">未入力</div>
+        <div class="summary-caption" id="summaryLeeText">4年・10年死亡リスク</div>
+      </div>
+      <div class="summary-card" id="summarySchonbergCard">
+        <div class="summary-label">Schonberg Index</div>
+        <div class="summary-value" id="summarySchonberg">未入力</div>
+        <div class="summary-caption" id="summarySchonbergText">5年・9年死亡リスク</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">BMI</div>
+        <div class="summary-value" id="summaryBmi">--</div>
+        <div class="summary-caption">身長・体重から自動計算</div>
+      </div>
+    </section>
+
+    <section class="common-card">
+      <h2>共通入力</h2>
+      <div class="input-grid">
+        <div class="field">
+          <label for="age">年齢（歳）</label>
+          <input type="number" id="age" min="1" max="120" step="1">
+        </div>
+        <div class="field">
+          <label for="sex">性別</label>
+          <select id="sex">
+            <option value="">未選択</option>
+            <option value="female">女性</option>
+            <option value="male">男性</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="height">身長（cm）</label>
+          <input type="number" id="height" min="80" max="230" step="0.1">
+        </div>
+        <div class="field">
+          <label for="weight">体重（kg）</label>
+          <input type="number" id="weight" min="20" max="250" step="0.1">
+        </div>
+        <div class="field">
+          <label>BMI</label>
+          <div class="bmi-box"><span>kg/m2</span><strong id="bmiValue">--</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="スコア選択">
+      <button class="tab-button active" type="button" data-tab="g8">G8</button>
+      <button class="tab-button" type="button" data-tab="lee">Lee Index</button>
+      <button class="tab-button" type="button" data-tab="schonberg">Schonberg Index</button>
+    </nav>
+
+    <section class="panel active" id="panel-g8">
+      <div class="result-grid">
+        <div class="result-card">
+          <h3>G8スコア</h3>
+          <div class="risk-number" id="g8Score">未入力</div>
+          <div class="risk-note" id="g8Interpretation">17点満点、14点以下で脆弱性ありとして扱う。</div>
+        </div>
+        <div class="result-card">
+          <h3>判定</h3>
+          <div class="risk-number" id="g8Risk">--</div>
+          <div class="risk-note">高齢がん患者の包括的高齢者機能評価（CGA）候補を拾い上げる目的。</div>
+        </div>
+        <div class="result-card">
+          <h3>BMIカテゴリ</h3>
+          <div class="risk-number" id="g8BmiCategory">--</div>
+          <div class="risk-note">BMI未入力時は手動選択を使用。</div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2>G8項目</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="g8Food">食事摂取量低下</label>
+            <select id="g8Food" data-g8="food">
+              <option value="">未選択</option>
+              <option value="0">高度低下（0点）</option>
+              <option value="1">中等度低下（1点）</option>
+              <option value="2">低下なし（2点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="g8Weight">3か月以内の体重減少</label>
+            <select id="g8Weight" data-g8="weight">
+              <option value="">未選択</option>
+              <option value="0">3kg超（0点）</option>
+              <option value="1">不明（1点）</option>
+              <option value="2">1-3kg（2点）</option>
+              <option value="3">なし（3点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="g8Mobility">自力移動</label>
+            <select id="g8Mobility" data-g8="mobility">
+              <option value="">未選択</option>
+              <option value="0">寝たきり/椅子上（0点）</option>
+              <option value="1">起居可、外出不可（1点）</option>
+              <option value="2">外出可（2点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="g8Neuro">神経心理学的問題</label>
+            <select id="g8Neuro" data-g8="neuro">
+              <option value="">未選択</option>
+              <option value="0">高度認知症/抑うつ（0点）</option>
+              <option value="1">軽度認知症（1点）</option>
+              <option value="2">問題なし（2点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="g8BmiManual">BMI</label>
+            <select id="g8BmiManual" data-g8="bmi">
+              <option value="">身長・体重から自動</option>
+              <option value="0">&lt;19（0点）</option>
+              <option value="1">19以上21未満（1点）</option>
+              <option value="2">21以上23未満（2点）</option>
+              <option value="3">23以上（3点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="g8Meds">内服薬 3剤超/日</label>
+            <select id="g8Meds" data-g8="meds">
+              <option value="">未選択</option>
+              <option value="0">はい（0点）</option>
+              <option value="1">いいえ（1点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="g8Health">同年代と比べた健康状態</label>
+            <select id="g8Health" data-g8="health">
+              <option value="">未選択</option>
+              <option value="0">よくない（0点）</option>
+              <option value="0.5">不明（0.5点）</option>
+              <option value="1">同程度（1点）</option>
+              <option value="2">よい（2点）</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-lee">
+      <div class="result-grid">
+        <div class="result-card">
+          <h3>Leeスコア</h3>
+          <div class="risk-number" id="leeScore">未入力</div>
+          <div class="risk-note">地域在住50歳以上が対象。</div>
+        </div>
+        <div class="result-card">
+          <h3>4年死亡リスク</h3>
+          <div class="risk-number" id="leeRisk4">--</div>
+          <div class="risk-note" id="leeRisk4Note">ePrognosis掲載カテゴリ。</div>
+        </div>
+        <div class="result-card">
+          <h3>10年死亡リスク</h3>
+          <div class="risk-number" id="leeRisk10">--</div>
+          <div class="risk-note" id="leeRisk10Note">ePrognosis掲載カテゴリ。</div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2>Lee Index項目</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="leeDiabetes">糖尿病</label>
+            <select id="leeDiabetes" data-lee="diabetes">
+              <option value="">未選択</option>
+              <option value="1">あり（1点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leeCancer">がん既往（軽微な皮膚がん除く）</label>
+            <select id="leeCancer" data-lee="cancer">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leeCopd">COPDで日常生活制限</label>
+            <select id="leeCopd" data-lee="copd">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leeChf">心不全</label>
+            <select id="leeChf" data-lee="chf">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leeSmoke">現喫煙</label>
+            <select id="leeSmoke" data-lee="smoke">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leeBathing">入浴に介助が必要</label>
+            <select id="leeBathing" data-lee="bathing">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leeFinance">金銭管理が困難</label>
+            <select id="leeFinance" data-lee="finance">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leeWalk">数ブロック歩行が困難</label>
+            <select id="leeWalk" data-lee="walk">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leePush">大きな物を押す/引くのが困難</label>
+            <select id="leePush" data-lee="push">
+              <option value="">未選択</option>
+              <option value="1">あり（1点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-schonberg">
+      <div class="result-grid">
+        <div class="result-card">
+          <h3>Schonbergスコア</h3>
+          <div class="risk-number" id="schonbergScore">未入力</div>
+          <div class="risk-note">地域在住65歳以上が対象。</div>
+        </div>
+        <div class="result-card">
+          <h3>5年死亡リスク</h3>
+          <div class="risk-number" id="schonbergRisk5">--</div>
+          <div class="risk-note" id="schonbergRisk5Note">2001-2004年NHIS新規検証コホート。</div>
+        </div>
+        <div class="result-card">
+          <h3>9年死亡リスク</h3>
+          <div class="risk-number" id="schonbergRisk9">--</div>
+          <div class="risk-note" id="schonbergRisk9Note">1997-2000年NHIS延長追跡の検証コホート。</div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2>Schonberg Index項目</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="schSmoke">喫煙歴</label>
+            <select id="schSmoke" data-schonberg="smoke">
+              <option value="">未選択</option>
+              <option value="0">なし（0点）</option>
+              <option value="1">過去喫煙（1点）</option>
+              <option value="3">現喫煙（3点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="schCancer">がん既往（黒色腫含む、非黒色腫皮膚がん除く）</label>
+            <select id="schCancer" data-schonberg="cancer">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="schDiabetes">糖尿病</label>
+            <select id="schDiabetes" data-schonberg="diabetes">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="schCopd">COPD</label>
+            <select id="schCopd" data-schonberg="copd">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="schHosp">過去1年の入院回数</label>
+            <select id="schHosp" data-schonberg="hospital">
+              <option value="">未選択</option>
+              <option value="0">0回（0点）</option>
+              <option value="1">1回（1点）</option>
+              <option value="3">2回以上（3点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="schHealth">自己評価健康状態</label>
+            <select id="schHealth" data-schonberg="health">
+              <option value="">未選択</option>
+              <option value="0">Excellent/Very good（0点）</option>
+              <option value="1">Good（1点）</option>
+              <option value="2">Fair/Poor（2点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="schIadl">日常用事・買い物・移動などに介助が必要</label>
+            <select id="schIadl" data-schonberg="iadl">
+              <option value="">未選択</option>
+              <option value="2">あり（2点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="schWalk">1/4マイル程度の歩行困難</label>
+            <select id="schWalk" data-schonberg="walk">
+              <option value="">未選択</option>
+              <option value="3">あり（3点）</option>
+              <option value="0">なし（0点）</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-card">
+      <h2>スコア内訳</h2>
+      <table class="score-detail">
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>点数</th>
+            <th>主な根拠</th>
+          </tr>
+        </thead>
+        <tbody id="scoreBreakdown">
+          <tr><td colspan="3">入力すると内訳を表示します。</td></tr>
+        </tbody>
+      </table>
+      <div class="notice">
+        予後スコアは集団データに基づく推定であり、個人の転帰を決めるものではありません。がん種、病期、治療選択、PS、臓器機能、認知機能、患者の価値観を必ず併せて判断してください。
+      </div>
+      <div class="refs">
+        参考:
+        <a href="https://eprognosis.ucsf.edu/lee.php" target="_blank" rel="noopener noreferrer">ePrognosis Lee Index</a> /
+        <a href="https://eprognosis.ucsf.edu/schonberg.php" target="_blank" rel="noopener noreferrer">ePrognosis Schonberg Index</a> /
+        Bellera CA et al. Ann Oncol. 2012;23:2166-2172 /
+        Soubeyran P et al. PLoS One. 2014;9:e115060 /
+        Lee SJ et al. JAMA. 2006;295:801-808 /
+        Schonberg MA et al. J Gen Intern Med. 2009;24:1115-1122; J Am Geriatr Soc. 2011;59:1444-1451.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const leeRisk4 = [
+      { min: 0, max: 3, risk: "<5%" },
+      { min: 4, max: 6, risk: "6-9%" },
+      { min: 7, max: 8, risk: "15-20%" },
+      { min: 9, max: 10, risk: "20-28%" },
+      { min: 11, max: 12, risk: "44-45%" },
+      { min: 13, max: 13, risk: "59%" },
+      { min: 14, max: Infinity, risk: "64%" }
+    ];
+
+    const leeRisk10 = [
+      { min: 0, max: 1, risk: "<5%" },
+      { min: 2, max: 3, risk: "7-10%" },
+      { min: 4, max: 5, risk: "15-23%" },
+      { min: 6, max: 7, risk: "34-43%" },
+      { min: 8, max: 9, risk: "52-58%" },
+      { min: 10, max: 11, risk: "70-82%" },
+      { min: 12, max: 13, risk: "83-91%" },
+      { min: 14, max: Infinity, risk: "93%" }
+    ];
+
+    const schonbergRisk5 = [
+      { min: 0, max: 1, risk: "2%" },
+      { min: 2, max: 3, risk: "4%" },
+      { min: 4, max: 5, risk: "6%" },
+      { min: 6, max: 7, risk: "9%" },
+      { min: 8, max: 9, risk: "13%" },
+      { min: 10, max: 11, risk: "23%" },
+      { min: 12, max: 13, risk: "35%" },
+      { min: 14, max: 15, risk: "43%" },
+      { min: 16, max: 17, risk: "59%" },
+      { min: 18, max: Infinity, risk: "69%" }
+    ];
+
+    const schonbergRisk9 = [
+      { min: 0, max: 1, risk: "7%" },
+      { min: 2, max: 3, risk: "8%" },
+      { min: 4, max: 5, risk: "16%" },
+      { min: 6, max: 7, risk: "26%" },
+      { min: 8, max: 9, risk: "33%" },
+      { min: 10, max: 11, risk: "52%" },
+      { min: 12, max: 13, risk: "58%" },
+      { min: 14, max: 15, risk: "75%" },
+      { min: 16, max: 17, risk: "83%" },
+      { min: 18, max: Infinity, risk: "92%" }
+    ];
+
+    function numericValue(id) {
+      const value = parseFloat($(id).value);
+      return Number.isFinite(value) ? value : null;
+    }
+
+    function selectNumber(id) {
+      const value = $(id).value;
+      if (value === "") return null;
+      const parsed = parseFloat(value);
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    function bmi() {
+      const height = numericValue("height");
+      const weight = numericValue("weight");
+      if (!height || !weight) return null;
+      return weight / Math.pow(height / 100, 2);
+    }
+
+    function agePointsLee(age) {
+      if (age === null || age < 50) return null;
+      if (age < 60) return 0;
+      if (age < 65) return 1;
+      if (age < 70) return 2;
+      if (age < 75) return 3;
+      if (age < 80) return 4;
+      if (age < 85) return 5;
+      return 7;
+    }
+
+    function agePointsSchonberg(age) {
+      if (age === null || age < 65) return null;
+      if (age < 70) return 0;
+      if (age < 75) return 1;
+      if (age < 80) return 3;
+      if (age < 85) return 5;
+      return 7;
+    }
+
+    function agePointsG8(age) {
+      if (age === null) return null;
+      if (age < 80) return 2;
+      if (age <= 85) return 1;
+      return 0;
+    }
+
+    function bmiG8Points(currentBmi) {
+      const manual = selectNumber("g8BmiManual");
+      if (manual !== null) return manual;
+      if (currentBmi === null) return null;
+      if (currentBmi < 19) return 0;
+      if (currentBmi < 21) return 1;
+      if (currentBmi < 23) return 2;
+      return 3;
+    }
+
+    function bmiG8Label(currentBmi) {
+      const manual = $("g8BmiManual").selectedOptions[0].textContent.replace(/（.+/, "");
+      if ($("g8BmiManual").value !== "") return manual;
+      if (currentBmi === null) return "--";
+      if (currentBmi < 19) return "<19";
+      if (currentBmi < 21) return "19-20.9";
+      if (currentBmi < 23) return "21-22.9";
+      return "23以上";
+    }
+
+    function riskFromTable(score, table) {
+      const row = table.find((item) => score >= item.min && score <= item.max);
+      return row ? row.risk : "--";
+    }
+
+    function setCardClass(card, level) {
+      card.classList.remove("good", "caution", "high");
+      if (level) card.classList.add(level);
+    }
+
+    function scoreLevel(score) {
+      if (score === null) return "";
+      if (score <= 7) return "good";
+      if (score <= 13) return "caution";
+      return "high";
+    }
+
+    function formatScore(score, max) {
+      if (score === null) return "未入力";
+      return `${Number.isInteger(score) ? score : score.toFixed(1)} / ${max}`;
+    }
+
+    function calculateG8(currentAge, currentBmi) {
+      const parts = [];
+      const add = (label, value) => {
+        parts.push({ label, value });
+      };
+      add("年齢", agePointsG8(currentAge));
+      add("BMI", bmiG8Points(currentBmi));
+      add("食事摂取量低下", selectNumber("g8Food"));
+      add("体重減少", selectNumber("g8Weight"));
+      add("自力移動", selectNumber("g8Mobility"));
+      add("神経心理学的問題", selectNumber("g8Neuro"));
+      add("内服薬 3剤超/日", selectNumber("g8Meds"));
+      add("同年代と比べた健康状態", selectNumber("g8Health"));
+
+      if (parts.some((part) => part.value === null)) return { score: null, parts };
+      return {
+        score: parts.reduce((sum, part) => sum + part.value, 0),
+        parts
+      };
+    }
+
+    function calculateLee(currentAge, currentBmi) {
+      const sex = $("sex").value;
+      const parts = [];
+      const add = (label, value) => parts.push({ label, value });
+      add("年齢", agePointsLee(currentAge));
+      add("男性", sex === "" ? null : (sex === "male" ? 2 : 0));
+      add("BMI <25", currentBmi === null ? null : (currentBmi < 25 ? 1 : 0));
+      add("糖尿病", selectNumber("leeDiabetes"));
+      add("がん既往", selectNumber("leeCancer"));
+      add("COPDで日常生活制限", selectNumber("leeCopd"));
+      add("心不全", selectNumber("leeChf"));
+      add("現喫煙", selectNumber("leeSmoke"));
+      add("入浴介助", selectNumber("leeBathing"));
+      add("金銭管理困難", selectNumber("leeFinance"));
+      add("歩行困難", selectNumber("leeWalk"));
+      add("大きな物の押し引き困難", selectNumber("leePush"));
+
+      if (parts.some((part) => part.value === null)) return { score: null, parts };
+      return {
+        score: parts.reduce((sum, part) => sum + part.value, 0),
+        parts
+      };
+    }
+
+    function calculateSchonberg(currentAge, currentBmi) {
+      const sex = $("sex").value;
+      const parts = [];
+      const add = (label, value) => parts.push({ label, value });
+      add("年齢", agePointsSchonberg(currentAge));
+      add("男性", sex === "" ? null : (sex === "male" ? 3 : 0));
+      add("喫煙歴", selectNumber("schSmoke"));
+      add("BMI <25", currentBmi === null ? null : (currentBmi < 25 ? 2 : 0));
+      add("がん既往", selectNumber("schCancer"));
+      add("糖尿病", selectNumber("schDiabetes"));
+      add("COPD", selectNumber("schCopd"));
+      add("過去1年の入院", selectNumber("schHosp"));
+      add("自己評価健康状態", selectNumber("schHealth"));
+      add("IADL介助", selectNumber("schIadl"));
+      add("歩行困難", selectNumber("schWalk"));
+
+      if (parts.some((part) => part.value === null)) return { score: null, parts };
+      return {
+        score: parts.reduce((sum, part) => sum + part.value, 0),
+        parts
+      };
+    }
+
+    function renderBreakdown(g8, lee, schonberg) {
+      const active = document.querySelector(".tab-button.active").dataset.tab;
+      const data = active === "g8" ? g8 : active === "lee" ? lee : schonberg;
+      const label = active === "g8" ? "G8" : active === "lee" ? "Lee" : "Schonberg";
+      const tbody = $("scoreBreakdown");
+      const rows = data.parts.map((part) => {
+        const value = part.value === null ? "未入力" : part.value;
+        return `<tr><td>${label}: ${part.label}</td><td>${value}</td><td>${part.value === null ? "入力待ち" : "加点済み"}</td></tr>`;
+      });
+      tbody.innerHTML = rows.join("");
+    }
+
+    function update() {
+      const currentAge = numericValue("age");
+      const currentBmi = bmi();
+      const bmiText = currentBmi === null ? "--" : currentBmi.toFixed(1);
+      $("bmiValue").textContent = bmiText;
+      $("summaryBmi").textContent = bmiText;
+
+      const g8 = calculateG8(currentAge, currentBmi);
+      $("g8Score").textContent = formatScore(g8.score, 17);
+      $("summaryG8").textContent = formatScore(g8.score, 17);
+      $("g8BmiCategory").textContent = bmiG8Label(currentBmi);
+      if (g8.score === null) {
+        $("g8Risk").textContent = "--";
+        $("g8Interpretation").textContent = "未入力項目があります。";
+        $("summaryG8Text").textContent = "未入力項目あり";
+        setCardClass($("summaryG8Card"), "");
+      } else if (g8.score <= 14) {
+        $("g8Risk").textContent = "CGA検討";
+        $("g8Interpretation").textContent = "14点以下: 脆弱性スクリーニング陽性。";
+        $("summaryG8Text").textContent = "脆弱性スクリーニング陽性";
+        setCardClass($("summaryG8Card"), "caution");
+      } else {
+        $("g8Risk").textContent = "陰性";
+        $("g8Interpretation").textContent = "15点以上: スクリーニング陰性。";
+        $("summaryG8Text").textContent = "スクリーニング陰性";
+        setCardClass($("summaryG8Card"), "good");
+      }
+
+      const lee = calculateLee(currentAge, currentBmi);
+      $("leeScore").textContent = lee.score === null ? "未入力" : `${lee.score} 点`;
+      $("summaryLee").textContent = lee.score === null ? "未入力" : `${lee.score} 点`;
+      if (lee.score === null) {
+        $("leeRisk4").textContent = "--";
+        $("leeRisk10").textContent = "--";
+        $("summaryLeeText").textContent = currentAge !== null && currentAge < 50 ? "対象年齢外（50歳未満）" : "未入力項目あり";
+        setCardClass($("summaryLeeCard"), "");
+      } else {
+        const risk4 = riskFromTable(lee.score, leeRisk4);
+        const risk10 = riskFromTable(lee.score, leeRisk10);
+        $("leeRisk4").textContent = risk4;
+        $("leeRisk10").textContent = risk10;
+        $("summaryLeeText").textContent = `4年 ${risk4} / 10年 ${risk10}`;
+        setCardClass($("summaryLeeCard"), scoreLevel(lee.score));
+      }
+
+      const schonberg = calculateSchonberg(currentAge, currentBmi);
+      $("schonbergScore").textContent = schonberg.score === null ? "未入力" : `${schonberg.score} 点`;
+      $("summarySchonberg").textContent = schonberg.score === null ? "未入力" : `${schonberg.score} 点`;
+      if (schonberg.score === null) {
+        $("schonbergRisk5").textContent = "--";
+        $("schonbergRisk9").textContent = "--";
+        $("summarySchonbergText").textContent = currentAge !== null && currentAge < 65 ? "対象年齢外（65歳未満）" : "未入力項目あり";
+        setCardClass($("summarySchonbergCard"), "");
+      } else {
+        const risk5 = riskFromTable(schonberg.score, schonbergRisk5);
+        const risk9 = riskFromTable(schonberg.score, schonbergRisk9);
+        $("schonbergRisk5").textContent = risk5;
+        $("schonbergRisk9").textContent = risk9;
+        $("summarySchonbergText").textContent = `5年 ${risk5} / 9年 ${risk9}`;
+        setCardClass($("summarySchonbergCard"), scoreLevel(schonberg.score));
+      }
+
+      renderBreakdown(g8, lee, schonberg);
+    }
+
+    document.querySelectorAll("input, select").forEach((element) => {
+      element.addEventListener("input", update);
+      element.addEventListener("change", update);
+    });
+
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab-button").forEach((item) => item.classList.remove("active"));
+        document.querySelectorAll(".panel").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        $(`panel-${button.dataset.tab}`).classList.add("active");
+        update();
+      });
+    });
+
+    update();
+  </script>
+</body>
+</html>

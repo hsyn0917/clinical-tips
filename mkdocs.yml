@@ -51,6 +51,7 @@ nav:
   - クイックツール:
     - 臨床計算機: calculator.html
     - 薬剤等価量換算: dose-converter.html
+    - 高齢者生命予後予測: elderly-prognosis.html
     - CTCAE v5/v6 検索: ctcae.html
   - 症状・救急:
     - めまい: dizziness.md
