@@ -65,6 +65,7 @@ nav:
     - 栄養管理: nutrition.md
   - がん診療:
     - irAEトリアージシート（PDF）: assets/ICIcheck.pdf
+    - CRT後durvalumab投与中の肺臓炎: durvalumab-pneumonitis-crt.md
     - がん性疼痛・オピオイド: opioid-cancer-pain.md
     - 精巣腫瘍・胚細胞腫瘍: germ-cell-tumor.md
     - IP合併肺癌の化学療法: ip-lung-cancer.md
