@@ -80,8 +80,8 @@ PACIFIC original protocolでは、G2 pneumonitisの再開条件は現在の実�
 
 | Grade | durvalumab | ステロイド・対応 | 再開 |
 |---|---|---|---|
-| **G1** | 原則継続可。鑑別中は休薬を考慮 | 2–4日程度で症状、SpO₂、検査を再評価 | 継続可 |
-| **G2** | **休薬** | prednisone **1–2 mg/kg/day**またはIV equivalent。3–5日改善しなければIV methylprednisolone 2–4 mg/kg/dayへ強化を検討 | **G≤1に安定し、steroid taper終了後5–7日経過**すれば次回予定投与から再開可能 |
+| **G1** | dose modification不要。ただし鑑別中は休薬を考慮 | 2–4日程度で症状、SpO₂、検査を再評価。呼吸器/感染症科相談を考慮 | 継続可 |
+| **G2** | **休薬** | prednisone **1–2 mg/kg/day**またはIV equivalent。3–5日改善しなければIV methylprednisolone **2–4 mg/kg/day**へ強化を検討 | **G≤1に安定し、steroid taper終了後5–7日経過**すれば、主治医判断で次回予定投与から再開 |
 | **G3–4** | **永久中止** | IV methylprednisolone **1–4 mg/kg/day**、入院、酸素、呼吸器/感染症科相談。3–5日不応なら追加免疫抑制を検討 | 再開しない |
 
 Appendix Hの一般的なirAEルールとして、以下の場合も永久中止とされている。
@@ -93,14 +93,14 @@ Appendix Hの一般的なirAEルールとして、以下の場合も永久中止
 
 ## 2024 consensusとPACIFIC protocolの差
 
-| 項目 | 2024 modified Delphi consensus | PACIFIC protocol |
+| 項目 | 2024 modified Delphi consensus | PACIFIC protocol (Appendix H) |
 |---|---|---|
 | RPとICI-pneumonitisの区別 | **明確に区別して対応** | trial protocolでは両者を十分に分離していない |
 | CTと照射野の比較 | **推奨**。RPは典型的に20 Gy isodose line内 | 明確な実臨床アルゴリズムとしては規定されていない |
 | G1 RP | 原則治療不要、durvalumab開始・継続可能 | G1 pneumonitisはdose modificationなし |
 | G2 RP | 観察可能。悪化時にステロイド。durvalumab休薬を考慮 | original Table 5では休薬し、3日以内の改善がなければ中止 |
-| G2 ICI-pneumonitis | **休薬＋PSL 1–2 mg/kg/day** | Appendix Hと概ね整合 |
-| 再開条件 | 症状消失＋PSL ≤10 mg/day。ICI肺臓炎では個別判断 | Appendix HではG≤1＋steroid taper終了後5–7日 |
+| G2 ICI-pneumonitis | **休薬＋PSL 1–2 mg/kg/day** | 休薬。prednisone 1–2 mg/kg/dayまたはIV equivalent |
+| 再開条件 | 症状消失＋PSL ≤10 mg/day。ICI肺臓炎では個別判断 | G≤1に安定＋steroid taper終了後5–7日。再開は主治医判断 |
 | G3 | 原則再開しないが、迅速かつ完全なsteroid responseなら例外的に検討余地 | pneumonitisでは永久中止 |
 | G4 | 再開しない | 永久中止 |
 
