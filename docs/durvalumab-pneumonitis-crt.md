@@ -1,17 +1,13 @@
 # CRT後durvalumab投与中の肺臓炎：RPとICI-pneumonitisの鑑別・休薬・再開
 
-## 実臨床向けフローチャート
-
-2024年のmodified Delphi consensusでは、CRT後durvalumab投与中に肺臓炎を認めた場合、**CTCAE gradeだけでなく、胸部CTと放射線治療dose mapを照合し、radiation pneumonitis（RP）優位かICI-related pneumonitis優位かを評価する**ことが推奨されている。
-
-### 1．初期評価と病型の推定
+## 実臨床クイックフロー
 
 ```mermaid
 flowchart TD
-    A(["CRT後 durvalumab投与中"]) --> B["新規陰影または呼吸器症状<br>GGO / consolidation<br>咳・呼吸困難・SpO₂低下"]
-    B --> C["感染・PD・心不全・PEなどを除外<br>HRCT ＋ SpO₂評価"]
+    A(["CRT後 durvalumab投与中<br>新規陰影・呼吸器症状"]) --> B["HRCT・SpO₂・CTCAE gradeを確認"]
+    B --> C["感染・PD・心不全・PEなどを除外"]
     C --> D["胸部CTと放射線dose mapを比較"]
-    D --> E(["画像分布から病型を推定"])
+    D --> E(["RP / ICI-pneumonitis / 判別困難"])
 
     classDef start fill:#dbeafe,stroke:#1d4ed8,color:#111827,stroke-width:2px
     classDef result fill:#ede9fe,stroke:#6d28d9,color:#111827,stroke-width:2px
@@ -27,31 +23,6 @@ flowchart TD
 
 !!! caution "判別困難"
     症候性なら**durvalumabを一旦休薬**し、ICI-pneumonitisに準じて保守的に対応する。
-
-### 2．CTCAE gradeに応じた対応
-
-```mermaid
-flowchart TD
-    H(["病型推定後"]) --> I["CTCAE gradeを決定"]
-    I --> J["Gradeに応じて観察・休薬・治療"]
-    J --> K["症状・SpO₂・画像・PSL量を再評価"]
-    K --> L(["durvalumabの継続・再開・中止を判断"])
-
-    classDef restart fill:#dbeafe,stroke:#1d4ed8,color:#111827,stroke-width:2px
-    class H,L restart
-```
-
-!!! success "G1｜経過観察中心"
-    症状・SpO₂・画像を頻回評価する。RP優位ではdurvalumab継続可能。ICI-pneumonitis優位では継続・休薬を個別判断する。
-
-!!! warning "G2｜durvalumab休薬を基本"
-    RP優位では症状悪化時にステロイドを開始。ICI-pneumonitis優位では**PSL 1–2 mg/kg/day**を開始し、48–72時間で反応を評価する。
-
-!!! danger "G3–4｜入院・酸素・全身ステロイド"
-    durvalumabを休薬または中止する。G3後の再開は例外的に検討し、**G4後は再開しない**。
-
-!!! info "再開の基本条件"
-    **症状消失＋画像改善＋PSL ≤10 mg/day**。ICI-pneumonitisでは、より慎重に個別判断する。
 
 ---
 
