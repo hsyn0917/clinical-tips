@@ -59,6 +59,7 @@ nav:
     - 低K血症: hypokalemia.md
     - 在宅NPPV：適応と設定: nppv.md
   - 感染症・支持療法:
+    - 抗菌薬アレルギー: antibiotic-allergy.md
     - CDI: cdi.md
     - 好中球減少性腸炎: neutropenic-enterocolitis.md
     - 肺炎球菌ワクチン: pneumococcal-vaccine.md
